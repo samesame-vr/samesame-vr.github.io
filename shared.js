@@ -1,96 +1,96 @@
-/* ── Same Same Verona — shared.js ─────────────────────────────────────
-   Handles: language switch (IT/EN), nav injection, footer injection,
-   active nav link, smooth scroll, and mobile menu.
-   Usage: <script src="shared.js"></script> at end of <body>.
-   Set window.SS_PAGE = 'home' | 'lavori' | 'preventivo' | 'contatti'
-   before including this script to highlight the correct nav link.
+/* ── Same Same Verona — shared.js ──────────────────────────────────────
+   Nav injection, footer injection, language switch (IT/EN),
+   scroll reveal, mobile menu.
 ──────────────────────────────────────────────────────────────────────── */
 
 /* ── TRANSLATIONS ─────────────────────────────────────────────────────── */
 const T = {
   it: {
-    nav_come:      'Come funziona',
-    nav_lavori:    'Lavori',
-    nav_preventivo:'Preventivo',
-    nav_contatti:  'Contatti',
-    footer_copy:   '© 2026 Same Same Verona · Stampa 3D & Design',
-    footer_made:   'Fatto con cura a Verona',
-    lang_label:    'EN',
-    lang_title:    'Switch to English',
+    nav_come:       'Come funziona',
+    nav_lavori:     'Lavori',
+    nav_preventivo: 'Preventivo',
+    nav_contatti:   'Contatti',
+    footer_copy:    '© 2026 Same Same Verona · Stampa 3D & Design',
+    footer_made:    'Fatto con cura a Verona',
+    lang_label:     'EN',
+    lang_title:     'Switch to English',
   },
   en: {
-    nav_come:      'How it works',
-    nav_lavori:    'Work',
-    nav_preventivo:'Get a quote',
-    nav_contatti:  'Contact',
-    footer_copy:   '© 2026 Same Same Verona · 3D Printing & Design',
-    footer_made:   'Made with care in Verona',
-    lang_label:    'IT',
-    lang_title:    'Passa all\'italiano',
+    nav_come:       'How it works',
+    nav_lavori:     'Work',
+    nav_preventivo: 'Get a quote',
+    nav_contatti:   'Contact',
+    footer_copy:    '© 2026 Same Same Verona · 3D Printing & Design',
+    footer_made:    'Made with care in Verona',
+    lang_label:     'IT',
+    lang_title:     "Passa all'italiano",
   }
 };
 
 /* ── LANGUAGE STATE ───────────────────────────────────────────────────── */
-let lang = localStorage.getItem('ss_lang') || 'it';
+// Leggiamo subito — nessun listener, nessun DOMContentLoaded
+let currentLang = localStorage.getItem('ss_lang') || 'it';
 
-function setLang(l) {
-  lang = l;
+function applyLang(l) {
+  currentLang = l;
   localStorage.setItem('ss_lang', l);
   document.documentElement.lang = l;
 
+  // testi semplici
   document.querySelectorAll('[data-it]').forEach(el => {
-    el.textContent = el.getAttribute('data-' + l) || el.getAttribute('data-it');
-  });
-  document.querySelectorAll('[data-it-html]').forEach(el => {
-    el.innerHTML = el.getAttribute('data-' + l + '-html') || el.getAttribute('data-it-html');
+    const val = el.getAttribute('data-' + l);
+    if (val !== null) el.textContent = val;
   });
 
+  // testi HTML
+  document.querySelectorAll('[data-it-html]').forEach(el => {
+    const val = el.getAttribute('data-' + l + '-html');
+    if (val !== null) el.innerHTML = val;
+  });
+
+  // bottone lingua
   const btn = document.getElementById('lang-btn');
   if (btn) {
     btn.textContent = T[l].lang_label;
-    btn.title = T[l].lang_title;
+    btn.title       = T[l].lang_title;
   }
 
-  const navMap = {
+  // link nav
+  const ids = {
     'nav-come':       T[l].nav_come,
     'nav-lavori':     T[l].nav_lavori,
     'nav-preventivo': T[l].nav_preventivo,
     'nav-contatti':   T[l].nav_contatti,
   };
-  Object.entries(navMap).forEach(([id, txt]) => {
+  Object.entries(ids).forEach(([id, txt]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = txt;
   });
 
+  // footer
   const fc = document.getElementById('footer-copy');
   const fm = document.getElementById('footer-made');
   if (fc) fc.textContent = T[l].footer_copy;
   if (fm) fm.textContent = T[l].footer_made;
 }
 
-/* Esposto globalmente PRIMA del DOM ready — necessario perché il bottone
-   viene iniettato via innerHTML e il suo onclick viene parsato subito */
-window.setLang = setLang;
-
-/* ── NAV HTML ─────────────────────────────────────────────────────────── */
+/* ── NAV ──────────────────────────────────────────────────────────────── */
 function buildNav() {
-  const page = window.SS_PAGE || '';
-  const isActive = (p) => p === page ? ' nav-active' : '';
-  const nav = document.createElement('nav');
-  nav.id = 'site-nav';
-  nav.innerHTML = `
+  const page     = window.SS_PAGE || '';
+  const active   = (p) => p === page ? ' nav-active' : '';
+  const l        = currentLang;
+
+  const nav      = document.createElement('nav');
+  nav.id         = 'site-nav';
+  nav.innerHTML  = `
     <div class="nav-inner">
       <a class="nav-brand" href="index.html" aria-label="Same Same Verona — home">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- layer posteriore -->
           <rect x="11" y="11" width="20" height="20" rx="2" fill="none" stroke="#2D5A1B" stroke-width="1.5" opacity="0.35"/>
-          <!-- layer anteriore — riempito con bg per "coprire" quello dietro -->
-          <rect x="3" y="3" width="20" height="20" rx="2" fill="#F7F4EE" stroke="#1A1A18" stroke-width="1.8"/>
-          <!-- 3 linee layer visibili nell'anteriore -->
+          <rect x="3"  y="3"  width="20" height="20" rx="2" fill="#F7F4EE" stroke="#1A1A18" stroke-width="1.8"/>
           <line x1="7" y1="10" x2="19" y2="10" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
           <line x1="7" y1="15" x2="19" y2="15" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
           <line x1="7" y1="20" x2="19" y2="20" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
-          <!-- dot connessione -->
           <circle cx="23" cy="23" r="3.5" fill="#2D5A1B"/>
         </svg>
         <span class="nav-brand-text">Same Same</span>
@@ -99,51 +99,51 @@ function buildNav() {
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="index.html#come-funziona" id="nav-come" class="nav-link${isActive('come')}">${T[lang].nav_come}</a></li>
-        <li><a href="lavori.html"     id="nav-lavori"     class="nav-link${isActive('lavori')}">${T[lang].nav_lavori}</a></li>
-        <li><a href="preventivo.html" id="nav-preventivo" class="nav-link${isActive('preventivo')}">${T[lang].nav_preventivo}</a></li>
-        <li><a href="contatti.html"   id="nav-contatti"   class="nav-link${isActive('contatti')}">${T[lang].nav_contatti}</a></li>
+        <li><a href="index.html#come-funziona" id="nav-come"      class="nav-link${active('come')}">${T[l].nav_come}</a></li>
+        <li><a href="lavori.html"              id="nav-lavori"    class="nav-link${active('lavori')}">${T[l].nav_lavori}</a></li>
+        <li><a href="preventivo.html"          id="nav-preventivo" class="nav-link${active('preventivo')}">${T[l].nav_preventivo}</a></li>
+        <li><a href="contatti.html"            id="nav-contatti"  class="nav-link${active('contatti')}">${T[l].nav_contatti}</a></li>
         <li>
-          <button id="lang-btn" class="nav-lang" title="${T[lang].lang_title}">
-            ${T[lang].lang_label}
+          <button id="lang-btn" class="nav-lang" title="${T[l].lang_title}">
+            ${T[l].lang_label}
           </button>
         </li>
       </ul>
-    </div>
-  `;
+    </div>`;
+
   document.body.prepend(nav);
 
-  // bottone lingua — addEventListener diretto, nessun onclick inline
+  // Lingua — addEventListener dopo il prepend, la funzione è già in scope
   document.getElementById('lang-btn').addEventListener('click', () => {
-    setLang(lang === 'it' ? 'en' : 'it');
+    applyLang(currentLang === 'it' ? 'en' : 'it');
   });
 
-  // burger
-  document.getElementById('nav-burger').addEventListener('click', function() {
+  // Burger menu mobile
+  document.getElementById('nav-burger').addEventListener('click', function () {
     const links = document.getElementById('nav-links');
-    const open = links.classList.toggle('open');
-    this.setAttribute('aria-expanded', open);
+    const open  = links.classList.toggle('open');
+    this.setAttribute('aria-expanded', String(open));
   });
 }
 
-/* ── FOOTER HTML ──────────────────────────────────────────────────────── */
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
 function buildFooter() {
+  const l      = currentLang;
   const footer = document.createElement('footer');
-  footer.id = 'site-footer';
+  footer.id    = 'site-footer';
   footer.innerHTML = `
     <div class="footer-inner">
       <div class="footer-brand">
         <span class="footer-name">Same Same Verona</span>
-        <span class="footer-sub" id="footer-made">${T[lang].footer_made}</span>
+        <span class="footer-sub" id="footer-made">${T[l].footer_made}</span>
       </div>
       <div class="footer-links">
         <a href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">Instagram</a>
         <a href="mailto:samesame.verona@gmail.com">Email</a>
         <a href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener">Consulenza</a>
       </div>
-      <p class="footer-copy" id="footer-copy">${T[lang].footer_copy}</p>
-    </div>
-  `;
+      <p class="footer-copy" id="footer-copy">${T[l].footer_copy}</p>
+    </div>`;
   document.body.appendChild(footer);
 }
 
@@ -161,6 +161,8 @@ function initReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   buildNav();
   buildFooter();
-  setLang(lang);
+  // Applica la lingua DOPO aver costruito nav e footer
+  // ma NON toccare il bottone lang (già renderizzato correttamente in buildNav)
+  applyLang(currentLang);
   initReveal();
 });

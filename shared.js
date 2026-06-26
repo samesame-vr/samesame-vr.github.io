@@ -75,16 +75,17 @@ function buildNav() {
   nav.innerHTML = `
     <div class="nav-inner">
       <a class="nav-brand" href="index.html" aria-label="Same Same Verona — home">
-        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="12" y="12" width="20" height="20" rx="2" fill="none" stroke="#2D5A1B" stroke-width="1.2" opacity="0.45"/>
-          <line x1="12" y1="17.5" x2="32" y2="17.5" stroke="#2D5A1B" stroke-width="0.7" opacity="0.35"/>
-          <line x1="12" y1="23"   x2="32" y2="23"   stroke="#2D5A1B" stroke-width="0.7" opacity="0.35"/>
-          <line x1="12" y1="28.5" x2="32" y2="28.5" stroke="#2D5A1B" stroke-width="0.7" opacity="0.35"/>
-          <rect x="4" y="4" width="20" height="20" rx="2" fill="#F7F4EE" stroke="#1A1A18" stroke-width="1.2"/>
-          <line x1="4" y1="9.5"  x2="24" y2="9.5"  stroke="#1A1A18" stroke-width="0.6" opacity="0.4"/>
-          <line x1="4" y1="15"   x2="24" y2="15"   stroke="#1A1A18" stroke-width="0.6" opacity="0.4"/>
-          <line x1="4" y1="20.5" x2="24" y2="20.5" stroke="#1A1A18" stroke-width="0.6" opacity="0.4"/>
-          <circle cx="24" cy="24" r="2.5" fill="#2D5A1B"/>
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- layer posteriore -->
+          <rect x="11" y="11" width="20" height="20" rx="2" fill="none" stroke="#2D5A1B" stroke-width="1.5" opacity="0.35"/>
+          <!-- layer anteriore — riempito con bg per "coprire" quello dietro -->
+          <rect x="3" y="3" width="20" height="20" rx="2" fill="#F7F4EE" stroke="#1A1A18" stroke-width="1.8"/>
+          <!-- 3 linee layer visibili nell'anteriore -->
+          <line x1="7" y1="10" x2="19" y2="10" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
+          <line x1="7" y1="15" x2="19" y2="15" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
+          <line x1="7" y1="20" x2="19" y2="20" stroke="#1A1A18" stroke-width="1" opacity="0.35"/>
+          <!-- dot connessione -->
+          <circle cx="23" cy="23" r="3.5" fill="#2D5A1B"/>
         </svg>
         <span class="nav-brand-text">Same Same</span>
       </a>

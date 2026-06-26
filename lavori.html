@@ -54,7 +54,12 @@
       background: var(--bg3); cursor: pointer;
       aspect-ratio: 1;
     }
-    .work-card:nth-child(4n+1) { aspect-ratio: auto; grid-row: span 2; }
+    /* Solo la prima card è più alta — span esplicito, non automatico */
+    .work-card:first-child {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+    }
 
     .work-card img {
       width: 100%; height: 100%; object-fit: cover;

@@ -37,34 +37,40 @@ function setLang(l) {
   lang = l;
   localStorage.setItem('ss_lang', l);
   document.documentElement.lang = l;
+
   document.querySelectorAll('[data-it]').forEach(el => {
     el.textContent = el.getAttribute('data-' + l) || el.getAttribute('data-it');
   });
   document.querySelectorAll('[data-it-html]').forEach(el => {
     el.innerHTML = el.getAttribute('data-' + l + '-html') || el.getAttribute('data-it-html');
   });
+
   const btn = document.getElementById('lang-btn');
   if (btn) {
     btn.textContent = T[l].lang_label;
     btn.title = T[l].lang_title;
   }
-  // update nav texts
-  const map = {
-    'nav-come':      [T[l].nav_come],
-    'nav-lavori':    [T[l].nav_lavori],
-    'nav-preventivo':[T[l].nav_preventivo],
-    'nav-contatti':  [T[l].nav_contatti],
+
+  const navMap = {
+    'nav-come':       T[l].nav_come,
+    'nav-lavori':     T[l].nav_lavori,
+    'nav-preventivo': T[l].nav_preventivo,
+    'nav-contatti':   T[l].nav_contatti,
   };
-  Object.entries(map).forEach(([id, [txt]]) => {
+  Object.entries(navMap).forEach(([id, txt]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = txt;
   });
-  // footer
+
   const fc = document.getElementById('footer-copy');
   const fm = document.getElementById('footer-made');
   if (fc) fc.textContent = T[l].footer_copy;
   if (fm) fm.textContent = T[l].footer_made;
 }
+
+/* Esposto globalmente PRIMA del DOM ready — necessario perché il bottone
+   viene iniettato via innerHTML e il suo onclick viene parsato subito */
+window.setLang = setLang;
 
 /* ── NAV HTML ─────────────────────────────────────────────────────────── */
 function buildNav() {
@@ -98,8 +104,7 @@ function buildNav() {
         <li><a href="preventivo.html" id="nav-preventivo" class="nav-link${isActive('preventivo')}">${T[lang].nav_preventivo}</a></li>
         <li><a href="contatti.html"   id="nav-contatti"   class="nav-link${isActive('contatti')}">${T[lang].nav_contatti}</a></li>
         <li>
-          <button id="lang-btn" class="nav-lang" title="${T[lang].lang_title}"
-                  onclick="setLang(lang==='it'?'en':'it')">
+          <button id="lang-btn" class="nav-lang" title="${T[lang].lang_title}">
             ${T[lang].lang_label}
           </button>
         </li>
@@ -107,6 +112,11 @@ function buildNav() {
     </div>
   `;
   document.body.prepend(nav);
+
+  // bottone lingua — addEventListener diretto, nessun onclick inline
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    setLang(lang === 'it' ? 'en' : 'it');
+  });
 
   // burger
   document.getElementById('nav-burger').addEventListener('click', function() {

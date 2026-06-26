@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavori – Same Same Verona</title>
+  <meta name="description" content="Portfolio dei lavori di Same Same Verona: ricambi ricostruiti, design originali, regali personalizzati stampati in 3D.">
+  <meta name="robots" content="index, follow">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    .page-header {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--line);
+    }
+    .page-header-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+    }
+    .page-header h1 { line-height: 1; }
+    .page-header-note {
+      font-family: var(--font-sans); font-size: 0.95rem;
+      color: var(--ink3); line-height: 1.7; max-width: 380px;
+    }
+
+    /* ── FILTER BAR ─────────────────────────────────────── */
+    .filter-bar {
+      padding: 28px 0; border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
+      text-transform: uppercase; background: none; border: 1px solid var(--line);
+      border-radius: 1px; padding: 6px 14px; cursor: pointer; color: var(--ink3);
+      transition: border-color 0.18s, color 0.18s, background 0.18s;
+    }
+    .filter-btn:hover   { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.active  { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── WORK GRID ──────────────────────────────────────── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 2px;
+    }
+    .work-card {
+      position: relative; overflow: hidden;
+      background: var(--bg3); cursor: pointer;
+      aspect-ratio: 1;
+    }
+    .work-card:nth-child(4n+1) { aspect-ratio: auto; grid-row: span 2; }
+
+    .work-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.8) brightness(0.95);
+      transition: filter 0.4s, transform 0.5s;
+    }
+    .work-card:hover img { filter: saturate(1) brightness(1); transform: scale(1.04); }
+
+    .work-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,26,24,0.82) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.35s;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 24px;
+    }
+    .work-card:hover .work-overlay { opacity: 1; }
+
+    .work-cat {
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(247,244,238,0.6); margin-bottom: 6px;
+    }
+    .work-title {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+      color: #F7F4EE; line-height: 1.2;
+    }
+    .work-price {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      color: rgba(247,244,238,0.55); margin-top: 5px;
+    }
+    .work-ig {
+      position: absolute; top: 14px; right: 14px;
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em;
+      text-decoration: none; color: rgba(247,244,238,0.7);
+      border: 1px solid rgba(247,244,238,0.25); padding: 4px 10px; border-radius: 1px;
+      opacity: 0; transform: translateY(-4px);
+      transition: opacity 0.3s, transform 0.3s, border-color 0.3s;
+    }
+    .work-card:hover .work-ig { opacity: 1; transform: translateY(0); border-color: rgba(247,244,238,0.6); }
+
+    /* ── BEFORE/AFTER SECTION ───────────────────────────── */
+    .ba-section { padding: 100px 0; border-top: 1px solid var(--line); }
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: center; }
+    .ba-img {
+      position: relative; overflow: hidden; border-radius: 2px;
+      background: var(--bg3);
+    }
+    .ba-img img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: saturate(0.85); }
+    .ba-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; background: var(--bg); color: var(--ink);
+      padding: 4px 8px; border-radius: 1px;
+    }
+    .ba-arrow {
+      text-align: center;
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 1.6rem; color: var(--ink3);
+    }
+
+    /* ── CTA STRIP ──────────────────────────────────────── */
+    .cta-strip {
+      padding: 80px 0; border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .cta-strip h2 { margin-bottom: 20px; }
+    .cta-strip p  { font-family: var(--font-sans); color: var(--ink3); margin-bottom: 28px; font-size: 0.95rem; line-height:1.7; }
+
+    @media (max-width: 860px) {
+      .page-header-inner { grid-template-columns: 1fr; gap: 20px; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .work-card:nth-child(4n+1) { grid-row: span 1; aspect-ratio: 1; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .ba-arrow { transform: rotate(90deg); font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'lavori';</script>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="wrap">
+      <div class="page-header-inner">
+        <div class="reveal">
+          <p class="section-label" data-it="Portfolio" data-en="Portfolio">Portfolio</p>
+          <h1 data-it="I nostri lavori" data-en="Our work">I nostri<br><em style="font-style:italic;color:var(--green)">lavori</em></h1>
+        </div>
+        <p class="page-header-note reveal d2"
+           data-it="Ogni progetto parte da un oggetto compromesso e termina con una soluzione più resistente dell'originale. Prezzi indicativi inclusi."
+           data-en="Every project starts from a compromised object and ends with a solution stronger than the original. Indicative prices included.">
+          Ogni progetto parte da un oggetto compromesso e termina con una soluzione più resistente dell'originale. Prezzi indicativi inclusi.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTER BAR -->
+  <div class="wrap">
+    <div class="filter-bar" role="group" aria-label="Filtra per categoria">
+      <button class="filter-btn active" data-filter="all"
+              data-it="Tutti" data-en="All">Tutti</button>
+      <button class="filter-btn" data-filter="ricambi"
+              data-it="Ricambi" data-en="Spare parts">Ricambi</button>
+      <button class="filter-btn" data-filter="design"
+              data-it="Design originale" data-en="Original design">Design originale</button>
+      <button class="filter-btn" data-filter="regali"
+              data-it="Regali" data-en="Gifts">Regali</button>
+    </div>
+  </div>
+
+  <!-- WORK GRID -->
+  <div class="wrap" style="padding-top:2px;">
+    <div class="work-grid" id="workGrid">
+
+      <div class="work-card reveal" data-cat="ricambi">
+        <img src="6048442580439076320.jpg" alt="Gear ring ricostruiti in PLA bianco">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Ricambi" data-en="Spare parts">Ricambi</p>
+          <p class="work-title" data-it="Flangia dentata — ricostruzione" data-en="Gear ring — reconstruction">Flangia dentata — ricostruzione</p>
+          <p class="work-price" data-it="~€28 · PLA · 3 giorni" data-en="~€28 · PLA · 3 days">~€28 · PLA · 3 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="ricambi">
+        <img src="design.png" alt="Modello 3D in SketchUp del gear ring">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Progettazione" data-en="Design">Progettazione</p>
+          <p class="work-title" data-it="Modello 3D — fase di design" data-en="3D Model — design phase">Modello 3D — fase di design</p>
+          <p class="work-price" data-it="Incluso nel preventivo" data-en="Included in quote">Incluso nel preventivo</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="regali">
+        <img src="regali.jpg" alt="Ritratto in rilievo personalizzato su piastra PLA">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Regali" data-en="Gifts">Regali</p>
+          <p class="work-title" data-it="Ritratto in rilievo" data-en="Relief portrait">Ritratto in rilievo</p>
+          <p class="work-price" data-it="~€22 · PLA · 2 giorni" data-en="~€22 · PLA · 2 days">~€22 · PLA · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="design">
+        <img src="design_orig2.jpg" alt="Ferma-porta stampato in PETG nero">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Design originale" data-en="Original design">Design originale</p>
+          <p class="work-title" data-it="Ferma-porta minimalista" data-en="Minimalist door stopper">Ferma-porta minimalista</p>
+          <p class="work-price" data-it="~€15 · PETG · 2 giorni" data-en="~€15 · PETG · 2 days">~€15 · PETG · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="design">
+        <img src="design_orig1.jpg" alt="Porta-chiavi modulare stampato in PLA bianco">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Design originale" data-en="Original design">Design originale</p>
+          <p class="work-title" data-it="Porta-chiavi modulare" data-en="Modular key holder">Porta-chiavi modulare</p>
+          <p class="work-price" data-it="~€18 · PLA · 2 giorni" data-en="~€18 · PLA · 2 days">~€18 · PLA · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d3" data-cat="ricambi">
+        <img src="6048442580439076321.jpg" alt="Pezzi rotti prima della ricostruzione">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Prima / Dopo" data-en="Before / After">Prima / Dopo</p>
+          <p class="work-title" data-it="Analisi del guasto" data-en="Failure analysis">Analisi del guasto</p>
+          <p class="work-price" data-it="Fase di analisi inclusa" data-en="Analysis phase included">Fase di analisi inclusa</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <section class="ba-section">
+    <div class="wrap">
+      <p class="section-label reveal" data-it="Il processo in tre immagini" data-en="The process in three images">Il processo in tre immagini</p>
+      <h2 class="reveal d1" style="margin-bottom:48px;"
+          data-it="Prima, durante, dopo." data-en="Before, during, after.">Prima, durante, dopo.</h2>
+      <div class="ba-grid">
+        <div class="ba-img reveal d1">
+          <img src="6048442580439076321.jpg" alt="Pezzo originale rotto">
+          <span class="ba-label" data-it="Originale rotto" data-en="Broken original">Originale rotto</span>
+        </div>
+        <div class="ba-arrow reveal d2">→</div>
+        <div class="ba-img reveal d3">
+          <img src="6048442580439076320.jpg" alt="Pezzo ricostruito in stampa 3D">
+          <span class="ba-label" data-it="Ricostruito" data-en="Rebuilt">Ricostruito</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="wrap">
+      <h2 class="reveal"
+          data-it="Hai qualcosa da ricostruire?" data-en="Have something to rebuild?">
+        Hai qualcosa da ricostruire?
+      </h2>
+      <p class="reveal d1"
+         data-it="Mandaci una foto — è tutto quello che serve."
+         data-en="Send us a photo — that's all it takes.">
+        Mandaci una foto — è tutto quello che serve.
+      </p>
+      <div class="reveal d2" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-ink" href="preventivo.html"
+           data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="contatti.html"
+           data-it="Contattaci" data-en="Contact us">Contattaci</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+  <script>
+    /* Filter logic */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.work-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = f === 'all' || card.dataset.cat === f;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

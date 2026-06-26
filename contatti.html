@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti & FAQ – Same Same Verona</title>
+  <meta name="description" content="Contatta Same Same Verona: Instagram, email, o prenota una consulenza gratuita. Trova le risposte alle domande frequenti sulla stampa 3D.">
+  <meta name="robots" content="index, follow">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    .page-header {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ── CONTACT GRID ───────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 2px;
+    }
+    .contact-card {
+      background: var(--bg2);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card:hover { background: var(--bg3); }
+    .contact-card.full  { grid-column: 1 / -1; background: var(--ink); color: var(--bg); }
+    .contact-card.full:hover { background: var(--ink2); }
+
+    .cc-label {
+      font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink3);
+    }
+    .contact-card.full .cc-label { color: rgba(247,244,238,0.5); }
+
+    .cc-title {
+      font-family: var(--font-serif); font-weight: 700;
+      font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1;
+    }
+    .cc-desc {
+      font-family: var(--font-sans); font-size: 0.85rem;
+      color: var(--ink3); line-height: 1.65; max-width: 340px;
+    }
+    .contact-card.full .cc-desc { color: rgba(247,244,238,0.6); }
+
+    .cc-arrow {
+      position: absolute; bottom: 28px; right: 32px;
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 1.8rem; color: var(--green);
+      transition: transform 0.22s;
+    }
+    .contact-card.full .cc-arrow { color: rgba(247,244,238,0.4); }
+    .contact-card:hover .cc-arrow { transform: translate(3px, -3px); }
+
+    /* ── BOOKING / CAL SECTION ──────────────────────── */
+    .booking-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--line);
+    }
+    .booking-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .booking-aside { position: sticky; top: 90px; }
+    .booking-body {
+      font-family: var(--font-sans); font-size: 0.92rem;
+      color: var(--ink3); line-height: 1.75; margin-top: 18px;
+    }
+    .booking-cta { margin-top: 28px; }
+
+    /* cal.com embed placeholder */
+    .cal-embed {
+      background: var(--bg2); border: 1px solid var(--line);
+      border-radius: 2px; padding: 0; overflow: hidden;
+      min-height: 520px;
+    }
+    .cal-embed iframe {
+      width: 100%; height: 560px; border: none; display: block;
+    }
+    .cal-fallback {
+      padding: 48px; text-align: center;
+    }
+    .cal-fallback p {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--ink3); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    /* ── FAQ ────────────────────────────────────────── */
+    .faq-section { padding: 100px 0; border-top: 1px solid var(--line); }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-aside { position: sticky; top: 90px; }
+    .faq-list  { border-top: 1px solid var(--line); }
+
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      padding: 22px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; text-align: left;
+    }
+    .faq-q-text {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1rem;
+      color: var(--ink); letter-spacing: -0.01em; line-height: 1.3;
+    }
+    .faq-icon {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--line); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink3);
+      transition: background 0.18s, border-color 0.18s, transform 0.28s, color 0.18s;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--green); border-color: var(--green); color: var(--bg);
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      font-family: var(--font-sans); font-size: 0.88rem;
+      color: var(--ink3); line-height: 1.75;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.38s ease, padding 0.38s;
+      padding: 0 0 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 0 0 24px;
+    }
+
+    /* ── UNI ────────────────────────────────────────── */
+    .uni-section-full {
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg2);
+    }
+    .uni-full-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
+    .uni-card {
+      padding: 36px 40px;
+      background: var(--bg2);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .uni-card-color {
+      width: 12px; height: 3px; border-radius: 1px; margin-bottom: 4px;
+    }
+    .uni-card-name {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .uni-card-city {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink3);
+    }
+    .uni-card-desc {
+      font-family: var(--font-sans); font-size: 0.82rem;
+      color: var(--ink3); line-height: 1.6; margin-top: 4px;
+    }
+
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card.full { grid-column: 1; }
+      .booking-inner, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+      .booking-aside, .faq-aside { position: static; }
+      .uni-full-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'contatti';</script>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="section-label" data-it="Siamo qui" data-en="We're here">Siamo qui</p>
+        <h1>
+          <span data-it="Contatti" data-en="Contact">Contatti</span><br>
+          <em style="font-style:italic;color:var(--green);"
+              data-it="& FAQ" data-en="& FAQ">& FAQ</em>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT CARDS -->
+  <div class="wrap" style="padding-top:2px;">
+    <div class="contact-grid">
+
+      <a class="contact-card reveal" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">
+        <span class="cc-label" data-it="Social" data-en="Social">Social</span>
+        <span class="cc-title" data-it="Instagram" data-en="Instagram">Instagram</span>
+        <p class="cc-desc"
+           data-it="Mandaci un DM con la foto del pezzo — è il modo più veloce per iniziare."
+           data-en="Send us a DM with the photo — it's the fastest way to get started.">
+          Mandaci un DM con la foto del pezzo — è il modo più veloce per iniziare.
+        </p>
+        <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--green);">@same.same_vr</p>
+        <span class="cc-arrow">↗</span>
+      </a>
+
+      <a class="contact-card reveal d1" href="mailto:samesame.verona@gmail.com">
+        <span class="cc-label" data-it="Email" data-en="Email">Email</span>
+        <span class="cc-title" data-it="Scrivici" data-en="Write to us">Scrivici</span>
+        <p class="cc-desc"
+           data-it="Per richieste più dettagliate o se vuoi allegare più file, l'email è la scelta giusta."
+           data-en="For more detailed requests or if you want to attach more files, email is the right choice.">
+          Per richieste più dettagliate o se vuoi allegare più file, l'email è la scelta giusta.
+        </p>
+        <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--green);">samesame.verona@gmail.com</p>
+        <span class="cc-arrow">↗</span>
+      </a>
+
+      <a class="contact-card full reveal d2" href="preventivo.html">
+        <span class="cc-label" data-it="Il modo più strutturato" data-en="The most structured way">Il modo più strutturato</span>
+        <span class="cc-title" data-it="Compila il form preventivo →" data-en="Fill in the quote form →">Compila il form preventivo →</span>
+        <p class="cc-desc"
+           data-it="Descrivi il progetto, scegli il materiale, ricevi un preventivo dettagliato entro 24h."
+           data-en="Describe the project, choose the material, receive a detailed quote within 24h.">
+          Descrivi il progetto, scegli il materiale, ricevi un preventivo dettagliato entro 24h.
+        </p>
+        <span class="cc-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- BOOKING -->
+  <section class="booking-section">
+    <div class="wrap">
+      <div class="booking-inner">
+        <div class="booking-aside reveal">
+          <p class="section-label"
+             data-it="Consulenza gratuita" data-en="Free consultation">Consulenza gratuita</p>
+          <h2 data-it="Parliamoci<br>15 minuti." data-it-html="Parliamoci<br>15 minuti."
+              data-en-html="Let's talk<br>15 minutes.">
+            Parliamoci<br>15 minuti.
+          </h2>
+          <p class="booking-body"
+             data-it="Non sai bene cosa ti serve? Prenota una chiamata gratuita. Ti aiutiamo a capire se il tuo progetto è fattibile, con quale materiale e a che costo — senza impegno."
+             data-en="Not sure what you need? Book a free call. We'll help you understand if your project is feasible, with which material and at what cost — no commitment.">
+            Non sai bene cosa ti serve? Prenota una chiamata gratuita. Ti aiutiamo a capire se il tuo progetto è fattibile, con quale materiale e a che costo — senza impegno.
+          </p>
+          <div class="booking-cta">
+            <a class="btn btn-ink" href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener"
+               data-it="Prenota ora — è gratis" data-en="Book now — it's free">
+              Prenota ora — è gratis
+            </a>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="cal-embed">
+            <!-- Cal.com inline embed — sostituisce l'iframe se preferisci il widget -->
+            <div class="cal-fallback">
+              <p data-it="Clicca il bottone per aprire il calendario di prenotazione nella nuova tab — oppure incorpora il widget Cal.com qui incollando il loro snippet embed."
+                 data-en="Click the button to open the booking calendar in a new tab — or embed the Cal.com widget here by pasting their embed snippet.">
+                Clicca il bottone per aprire il calendario — o incolla qui lo snippet di Cal.com per il widget inline.
+              </p>
+              <a class="btn btn-ink" href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener"
+                 data-it="Apri calendario →" data-en="Open calendar →">
+                Apri calendario →
+              </a>
+              <!-- Per usare l'embed Cal.com sostituisci il div cal-fallback con:
+              <iframe src="https://cal.com/same-same/15min?embed=true&theme=light"
+                      style="width:100%;height:560px;border:none;"></iframe>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="faq-aside reveal">
+          <p class="section-label" data-it="Domande frequenti" data-en="FAQ">Domande frequenti</p>
+          <h2 data-it="Tutto quello che vuoi sapere." data-en="Everything you want to know.">
+            Tutto quello<br>che vuoi sapere.
+          </h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item reveal d1">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Quanto costa un preventivo?" data-en="How much does a quote cost?">
+                Quanto costa un preventivo?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Nulla. Il preventivo è sempre gratuito e senza impegno. Basta mandarci una foto o una descrizione — ti risponderemo entro 24 ore."
+                 data-en="Nothing. The quote is always free and without obligation. Just send us a photo or description — we'll reply within 24 hours.">
+                Nulla. Il preventivo è sempre gratuito e senza impegno. Basta mandarci una foto o una descrizione — ti risponderemo entro 24 ore.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d1">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Che materiali usate?" data-en="What materials do you use?">
+                Che materiali usate?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Lavoriamo principalmente con PLA (rigido, leggero, economico), PETG (resistente all'umidità e agli urti), TPU (flessibile e gommoso) e ABS (resistente al calore). Ti consigliamo il materiale più adatto in base all'uso del pezzo."
+                 data-en="We mainly work with PLA (rigid, lightweight, economical), PETG (moisture and impact resistant), TPU (flexible and rubbery) and ABS (heat resistant). We recommend the most suitable material based on the part's use.">
+                Lavoriamo principalmente con PLA, PETG, TPU e ABS. Ti consigliamo il materiale più adatto in base all'uso del pezzo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d2">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Quanto tempo ci vuole per avere il pezzo?" data-en="How long does it take to get the part?">
+                Quanto tempo ci vuole per avere il pezzo?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Dipende dalla complessità. Pezzi semplici: 2–3 giorni. Pezzi con design originale o geometrie complesse: 5–7 giorni. Ti diciamo i tempi esatti nel preventivo."
+                 data-en="It depends on complexity. Simple parts: 2–3 days. Parts with original design or complex geometry: 5–7 days. We tell you exact timings in the quote.">
+                Dipende dalla complessità. Pezzi semplici: 2–3 giorni. Design originali: 5–7 giorni. I tempi esatti sono nel preventivo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d2">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Posso mandare solo una foto, senza misure?" data-en="Can I send just a photo, without measurements?">
+                Posso mandare solo una foto, senza misure?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Sì. Una foto chiara è spesso sufficiente per iniziare. Se abbiamo bisogno di misure precise te lo chiediamo noi — oppure ci mandi il pezzo originale e lo misuriamo noi."
+                 data-en="Yes. A clear photo is often enough to get started. If we need precise measurements we'll ask you — or you can send us the original part and we'll measure it ourselves.">
+                Sì. Una foto chiara è spesso sufficiente. Se servono misure precise, te lo chiediamo noi.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d3">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Spedite in tutta Italia?" data-en="Do you ship across Italy?">
+                Spedite in tutta Italia?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Sì. Puoi ritirare a Verona oppure ricevere il pezzo direttamente a casa tramite corriere. I costi di spedizione vengono comunicati nel preventivo."
+                 data-en="Yes. You can pick up in Verona or receive the part at home via courier. Shipping costs are communicated in the quote.">
+                Sì. Ritiro a Verona o spedizione in tutta Italia. I costi di spedizione sono nel preventivo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d3">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Ho già un file STL — posso mandarlo direttamente?" data-en="I already have an STL file — can I send it directly?">
+                Ho già un file STL — posso mandarlo direttamente?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Certo. Mandaci il file STL via email o Wetransfer, dicci il materiale e la quantità — ti facciamo un preventivo di stampa in poche ore."
+                 data-en="Sure. Send us the STL file via email or Wetransfer, tell us the material and quantity — we'll give you a print quote within a few hours.">
+                Certo. Mandaci il file STL via email o WeTransfer con materiale e quantità — preventivo in poche ore.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d4">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Il pezzo sarà identico all'originale?" data-en="Will the part be identical to the original?">
+                Il pezzo sarà identico all'originale?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Funzionalmente sì, spesso meglio. Nel rimodellare il pezzo, rinforziamo i punti critici che hanno causato la rottura originale — il risultato è più resistente, non solo uguale."
+                 data-en="Functionally yes, often better. When remodeling the part, we reinforce the critical points that caused the original failure — the result is stronger, not just the same.">
+                Funzionalmente sì, spesso meglio. Rinforziamo i punti critici che hanno causato la rottura originale.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d4">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text"
+                    data-it="Siete davvero studenti universitari?" data-en="Are you really university students?">
+                Siete davvero studenti universitari?
+              </span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Sì — il team di Same Same Verona è composto da studenti delle università di Verona, Padova e Venezia. Questo ci permette di unire rigore tecnico, curiosità progettuale e prezzi accessibili."
+                 data-en="Yes — the Same Same Verona team is made up of students from the universities of Verona, Padua and Venice. This allows us to combine technical rigor, design curiosity and affordable prices.">
+                Sì — siamo studenti delle università di Verona, Padova e Venezia. Rigore tecnico, curiosità progettuale e prezzi accessibili.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNI CARDS -->
+  <section class="uni-section-full">
+    <div class="wrap">
+      <p class="section-label reveal"
+         style="margin-bottom:32px;"
+         data-it="Il team" data-en="The team">Il team</p>
+      <div class="uni-full-inner">
+        <div class="uni-card reveal d1">
+          <div class="uni-card-color" style="background:#006AB3;"></div>
+          <p class="uni-card-name">Università di Verona</p>
+          <p class="uni-card-city" data-it="Verona, VR" data-en="Verona, VR">Verona, VR</p>
+          <p class="uni-card-desc"
+             data-it="Il cuore del progetto. Da qui nasce Same Same Verona."
+             data-en="The heart of the project. Same Same Verona was born here.">
+            Il cuore del progetto. Da qui nasce Same Same Verona.
+          </p>
+        </div>
+        <div class="uni-card reveal d2">
+          <div class="uni-card-color" style="background:#9B0014;"></div>
+          <p class="uni-card-name">Università di Padova</p>
+          <p class="uni-card-city" data-it="Padova, PD" data-en="Padua, PD">Padova, PD</p>
+          <p class="uni-card-desc"
+             data-it="Contribuisce con competenze di ingegneria meccanica e modellazione 3D."
+             data-en="Contributes with mechanical engineering and 3D modelling expertise.">
+            Contribuisce con competenze di ingegneria meccanica e modellazione 3D.
+          </p>
+        </div>
+        <div class="uni-card reveal d3">
+          <div class="uni-card-color" style="background:#007B5E;"></div>
+          <p class="uni-card-name">Ca' Foscari Venezia</p>
+          <p class="uni-card-city" data-it="Venezia, VE" data-en="Venice, VE">Venezia, VE</p>
+          <p class="uni-card-desc"
+             data-it="Porta visione sul design, comunicazione e sviluppo del prodotto."
+             data-en="Brings vision on design, communication and product development.">
+            Porta visione sul design, comunicazione e sviluppo del prodotto.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+  <script>
+    /* ── FAQ ACCORDION ──────────────────────────────── */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        // close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // open clicked if was closed
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

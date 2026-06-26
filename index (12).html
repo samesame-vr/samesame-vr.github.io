@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Same Same Verona – Stampa 3D & Ricostruzione Ricambi</title>
+  <meta name="description" content="Pezzo rotto o ricambio introvabile? Same Same Verona lo ricrea in stampa 3D. Manda una foto, preventivo gratis in 24h. Verona.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://samesame-vr.github.io/">
+  <meta property="og:title"       content="Same Same Verona – Stampa 3D & Ricostruzione Ricambi">
+  <meta property="og:description" content="Pezzo rotto o ricambio introvabile? Lo ricostruiamo in stampa 3D. Preventivo gratis in 24h.">
+  <meta property="og:image"       content="https://samesame-vr.github.io/og-image.jpg">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="it_IT">
+  <meta name="twitter:card"       content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"Same Same Verona",
+   "description":"Stampa 3D, ricostruzione parti rotte e ricambi fuori produzione. Design su misura a Verona.",
+   "url":"https://samesame-vr.github.io/","email":"samesame.verona@gmail.com",
+   "address":{"@type":"PostalAddress","addressLocality":"Verona","addressRegion":"VR","addressCountry":"IT"},
+   "sameAs":["https://instagram.com/same.same_vr"]}
+  </script>
+
+  <!-- Google Analytics — sostituisci G-XXXXXXXXXX con il tuo Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; padding-top: 64px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+    .hero-left {
+      padding: 80px var(--pad) 80px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      border-right: 1px solid var(--line);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: riseIn 0.7s 0.1s ease forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--green); }
+    .hero-h1 {
+      opacity: 0; animation: riseIn 0.8s 0.25s ease forwards;
+    }
+    .hero-h1 em { font-style: italic; color: var(--green); }
+    .hero-tagline {
+      font-family: var(--font-sans); font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--ink2); line-height: 1.65; margin-top: 28px; max-width: 420px;
+      opacity: 0; animation: riseIn 0.8s 0.42s ease forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap;
+      opacity: 0; animation: riseIn 0.8s 0.58s ease forwards;
+    }
+    .hero-proof {
+      display: flex; gap: 0; margin-top: 52px;
+      border-top: 1px solid var(--line); padding-top: 28px;
+      opacity: 0; animation: riseIn 0.8s 0.72s ease forwards;
+    }
+    .proof-item { padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--line); }
+    .proof-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .proof-num {
+      font-family: var(--font-serif); font-weight: 700;
+      font-size: 2rem; color: var(--ink); line-height: 1;
+    }
+    .proof-label {
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink3); margin-top: 4px;
+    }
+
+    /* hero right: big editorial image grid */
+    .hero-right {
+      padding: 80px var(--pad) 80px;
+      display: grid; grid-template-rows: 1fr 1fr; gap: 12px;
+      height: 100%;
+    }
+    .hero-img-main {
+      position: relative; overflow: hidden; border-radius: 2px;
+      background: var(--bg3);
+    }
+    .hero-img-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform 0.6s ease;
+    }
+    .hero-img-main:hover img { transform: scale(1.03); }
+    .hero-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .hero-img-small {
+      position: relative; overflow: hidden; border-radius: 2px;
+      background: var(--bg3); aspect-ratio: 1;
+    }
+    .hero-img-small img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.85);
+      transition: transform 0.6s ease;
+    }
+    .hero-img-small:hover img { transform: scale(1.04); }
+
+    /* ── HOW IT WORKS ───────────────────────────────────── */
+    .how-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; }
+    .how-aside { position: sticky; top: 90px; }
+    .how-steps { border-top: 1px solid var(--line); }
+    .how-step {
+      display: grid; grid-template-columns: 40px 1fr; gap: 24px;
+      padding: 28px 0; border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .step-num {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.1em; color: var(--green); padding-top: 4px;
+    }
+    .step-title {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1.15rem;
+      color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .step-desc {
+      font-family: var(--font-sans); font-size: 0.88rem;
+      color: var(--ink3); line-height: 1.7;
+    }
+    .step-badge {
+      display: inline-block; margin-top: 10px;
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--green);
+      border: 1px solid var(--green-line); border-radius: 1px; padding: 3px 9px;
+    }
+
+    /* ── SERVICES ───────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: 80px; align-items: start; }
+    .services-aside { position: sticky; top: 90px; }
+    .service-list { border-top: 1px solid var(--line); }
+    .service-item {
+      display: grid; grid-template-columns: 44px 1fr; gap: 20px;
+      padding: 26px 0; border-bottom: 1px solid var(--line);
+      align-items: start; transition: padding-left 0.22s;
+    }
+    .service-item:hover { padding-left: 6px; }
+    .service-icon {
+      width: 40px; height: 40px; border: 1px solid var(--line);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink3);
+      flex-shrink: 0; transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .service-item:hover .service-icon { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+    .service-name {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem;
+      color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .service-desc { font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink3); line-height: 1.65; }
+    .service-price { font-family: var(--font-mono); font-size: 0.62rem; color: var(--green); margin-top: 7px; letter-spacing: 0.05em; }
+
+    /* ── UNI SECTION ────────────────────────────────────── */
+    .uni-section {
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+    }
+    .uni-inner {
+      display: flex; align-items: center; gap: 48px;
+      flex-wrap: wrap;
+    }
+    .uni-label {
+      font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink3); flex-shrink: 0;
+    }
+    .uni-logos { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+    .uni-logo-item {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink3); text-decoration: none;
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .uni-logo-item:hover { opacity: 1; }
+    .uni-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; padding: 48px var(--pad) 40px; }
+      .hero-right { display: none; }
+      .how-grid, .services-grid { grid-template-columns: 1fr; gap: 40px; }
+      .how-aside, .services-aside { position: static; }
+      .hero-proof { flex-wrap: wrap; gap: 16px; }
+      .proof-item { border-right: none; margin-right: 0; padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'home';</script>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow"
+         data-it="Verona · Stampa 3D & Ricostruzione Ricambi"
+         data-en="Verona · 3D Printing & Parts Reconstruction">
+        Verona · Stampa 3D & Ricostruzione Ricambi
+      </p>
+      <h1 class="hero-h1">
+        <span data-it="Ridiamo vita" data-en="We bring back">Ridiamo vita</span><br>
+        <em data-it="agli oggetti." data-en="your objects.">agli oggetti.</em>
+      </h1>
+      <p class="hero-tagline"
+         data-it="Pezzo rotto o ricambio introvabile? Manda una foto — preventivo gratuito in 24h. Nessun impegno."
+         data-en="Broken part or discontinued spare? Send a photo — free quote in 24h. No commitment.">
+        Pezzo rotto o ricambio introvabile? Manda una foto — preventivo gratuito in 24h. Nessun impegno.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-ink" href="preventivo.html"
+           data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="index.html#come-funziona"
+           data-it="Come funziona" data-en="How it works">Come funziona</a>
+      </div>
+      <div style="margin-top:14px">
+        <a class="btn btn-green" href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener"
+           data-it="Consulenza gratuita 15 min →" data-en="Free 15-min call →">
+          Consulenza gratuita 15 min →
+        </a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <p class="proof-num">50+</p>
+          <p class="proof-label" data-it="Pezzi ricostruiti" data-en="Parts rebuilt">Pezzi ricostruiti</p>
+        </div>
+        <div class="proof-item">
+          <p class="proof-num">24h</p>
+          <p class="proof-label" data-it="Preventivo gratis" data-en="Free quote">Preventivo gratis</p>
+        </div>
+        <div class="proof-item">
+          <p class="proof-num">3</p>
+          <p class="proof-label" data-it="Università" data-en="Universities">Università</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-img-main">
+        <img src="6048442580439076320.jpg" alt="Gear ricambi ricostruiti in stampa 3D">
+      </div>
+      <div class="hero-img-pair">
+        <div class="hero-img-small">
+          <img src="regali.jpg" alt="Regalo personalizzato stampato 3D">
+        </div>
+        <div class="hero-img-small">
+          <img src="design_orig1.jpg" alt="Porta-chiavi design originale">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HOW IT WORKS ───────────────────────────────────── -->
+  <section class="section" id="come-funziona">
+    <div class="wrap">
+      <div class="how-grid">
+        <div class="how-aside reveal">
+          <p class="section-label" data-it="Il processo" data-en="The process">Il processo</p>
+          <h2 data-it="Come funziona" data-en="How it works">Come funziona</h2>
+        </div>
+        <div class="how-steps">
+          <div class="how-step reveal d1">
+            <span class="step-num">01</span>
+            <div>
+              <p class="step-title" data-it="Manda una foto" data-en="Send a photo">Manda una foto</p>
+              <p class="step-desc"
+                 data-it="Scatta una foto del pezzo rotto o dell'oggetto da riprodurre e inviala via form, Instagram o email. Anche una sola foto è sufficiente per iniziare."
+                 data-en="Take a photo of the broken part or object to reproduce and send it via form, Instagram or email. Even a single photo is enough to get started.">
+                Scatta una foto del pezzo rotto o dell'oggetto da riprodurre e inviala via form, Instagram o email. Anche una sola foto è sufficiente per iniziare.
+              </p>
+              <span class="step-badge" data-it="Gratis · Nessun impegno" data-en="Free · No commitment">Gratis · Nessun impegno</span>
+            </div>
+          </div>
+          <div class="how-step reveal d2">
+            <span class="step-num">02</span>
+            <div>
+              <p class="step-title" data-it="Preventivo in 24h" data-en="Quote in 24h">Preventivo in 24h</p>
+              <p class="step-desc"
+                 data-it="Analizziamo il pezzo, stimiamo tempi e costi e ti mandiamo un preventivo chiaro. Se preferisci, prenota una chiamata gratuita di 15 minuti."
+                 data-en="We analyze the part, estimate time and cost, and send you a clear quote. If you prefer, book a free 15-minute call.">
+                Analizziamo il pezzo, stimiamo tempi e costi e ti mandiamo un preventivo chiaro. Se preferisci, prenota una chiamata gratuita di 15 minuti.
+              </p>
+              <span class="step-badge" data-it="Risposta entro 24h" data-en="Reply within 24h">Risposta entro 24h</span>
+            </div>
+          </div>
+          <div class="how-step reveal d3">
+            <span class="step-num">03</span>
+            <div>
+              <p class="step-title" data-it="Ritiro o spedizione" data-en="Pickup or delivery">Ritiro o spedizione</p>
+              <p class="step-desc"
+                 data-it="Progettiamo, stampiamo e rifinamo il pezzo. Puoi ritirarlo a Verona o riceverlo direttamente a casa. Ogni componente è testato prima della consegna."
+                 data-en="We design, print and finish the part. You can pick it up in Verona or receive it at home. Every component is tested before delivery.">
+                Progettiamo, stampiamo e rifinamo il pezzo. Puoi ritirarlo a Verona o riceverlo direttamente a casa. Ogni componente è testato prima della consegna.
+              </p>
+              <span class="step-badge" data-it="Ritiro a Verona o spedizione" data-en="Verona pickup or shipping">Ritiro a Verona o spedizione</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ───────────────────────────────────────── -->
+  <section class="section" id="servizi">
+    <div class="wrap">
+      <div class="services-grid">
+        <div class="services-aside reveal">
+          <p class="section-label" data-it="Cosa facciamo" data-en="What we do">Cosa facciamo</p>
+          <h2 data-it="I nostri servizi" data-en="Our services">I nostri servizi</h2>
+        </div>
+        <div class="service-list">
+          <div class="service-item reveal d1">
+            <div class="service-icon">01</div>
+            <div>
+              <p class="service-name" data-it="Ricostruzione parti" data-en="Part reconstruction">Ricostruzione parti</p>
+              <p class="service-desc"
+                 data-it="Ricreiamo pezzi rotti o mancanti partendo da una foto o da un campione fisico, con tolleranze da produzione."
+                 data-en="We recreate broken or missing parts from a photo or physical sample, with production-level tolerances.">
+                Ricreiamo pezzi rotti o mancanti partendo da una foto o da un campione fisico, con tolleranze da produzione.
+              </p>
+              <p class="service-price" data-it="A partire da €15" data-en="From €15">A partire da €15</p>
+            </div>
+          </div>
+          <div class="service-item reveal d2">
+            <div class="service-icon">02</div>
+            <div>
+              <p class="service-name" data-it="Ricambi fuori produzione" data-en="Discontinued spares">Ricambi fuori produzione</p>
+              <p class="service-desc"
+                 data-it="Componenti non più reperibili? Li riproduciamo fedeli all'originale — spesso più resistenti."
+                 data-en="Parts no longer available? We reproduce them true to the original — often stronger.">
+                Componenti non più reperibili? Li riproduciamo fedeli all'originale — spesso più resistenti.
+              </p>
+              <p class="service-price" data-it="Preventivo su misura" data-en="Custom quote">Preventivo su misura</p>
+            </div>
+          </div>
+          <div class="service-item reveal d3">
+            <div class="service-icon">03</div>
+            <div>
+              <p class="service-name" data-it="Design su misura" data-en="Custom design">Design su misura</p>
+              <p class="service-desc"
+                 data-it="Dalla tua idea a un oggetto reale: supporti, gadget, componenti unici progettati su misura."
+                 data-en="From your idea to a real object: holders, gadgets, unique components designed to measure.">
+                Dalla tua idea a un oggetto reale: supporti, gadget, componenti unici progettati su misura.
+              </p>
+              <p class="service-price" data-it="Consulenza iniziale gratuita" data-en="Free initial consultation">Consulenza iniziale gratuita</p>
+            </div>
+          </div>
+          <div class="service-item reveal d4">
+            <div class="service-icon">04</div>
+            <div>
+              <p class="service-name" data-it="Regali personalizzati" data-en="Custom gifts">Regali personalizzati</p>
+              <p class="service-desc"
+                 data-it="Oggetti unici, ritratti in rilievo, gadget su misura. Il regalo che non si trova in nessun negozio."
+                 data-en="Unique objects, relief portraits, custom gadgets. The gift you won't find anywhere else.">
+                Oggetti unici, ritratti in rilievo, gadget su misura. Il regalo che non si trova in nessun negozio.
+              </p>
+              <p class="service-price" data-it="A partire da €20" data-en="From €20">A partire da €20</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── UNIVERSITY STRIP ───────────────────────────────── -->
+  <section class="uni-section">
+    <div class="wrap">
+      <div class="uni-inner reveal">
+        <span class="uni-label" data-it="Un progetto degli studenti di" data-en="A project by students of">
+          Un progetto degli studenti di
+        </span>
+        <div class="uni-logos">
+          <a class="uni-logo-item" href="https://www.univr.it" target="_blank" rel="noopener" aria-label="Università di Verona">
+            <span class="uni-dot" style="background:#006AB3;"></span>
+            Univ. Verona
+          </a>
+          <a class="uni-logo-item" href="https://www.unipd.it" target="_blank" rel="noopener" aria-label="Università di Padova">
+            <span class="uni-dot" style="background:#9B0014;"></span>
+            Univ. Padova
+          </a>
+          <a class="uni-logo-item" href="https://www.unive.it" target="_blank" rel="noopener" aria-label="Università Ca'Foscari Venezia">
+            <span class="uni-dot" style="background:#007B5E;"></span>
+            Ca' Foscari Venezia
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINALE ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="wrap">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="reveal">
+        <div>
+          <p class="section-label" data-it="Inizia ora" data-en="Start now">Inizia ora</p>
+          <h2 data-it="Hai un pezzo rotto?" data-en="Got a broken part?">Hai un pezzo rotto?</h2>
+          <p style="font-family:var(--font-sans);font-size:0.95rem;color:var(--ink3);line-height:1.7;margin-top:16px;"
+             data-it="Mandaci una foto — è tutto quello che serve per cominciare."
+             data-en="Send us a photo — that's all it takes to get started.">
+            Mandaci una foto — è tutto quello che serve per cominciare.
+          </p>
+          <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+            <a class="btn btn-ink" href="preventivo.html"
+               data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+            <a class="btn btn-outline" href="lavori.html"
+               data-it="Vedi i lavori" data-en="See our work">Vedi i lavori</a>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="6048442580439076321.jpg" alt="Pezzi rotti prima della ricostruzione" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="6048442580439076320.jpg" alt="Pezzi ricostruiti dopo la stampa 3D" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="design.png" alt="Modello 3D in fase di progettazione" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="regali.jpg" alt="Regalo personalizzato ritratto in rilievo" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+</body>
+</html>

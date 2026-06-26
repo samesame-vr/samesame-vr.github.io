@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preventivo – Same Same Verona</title>
+  <meta name="description" content="Richiedi un preventivo gratuito a Same Same Verona. Manda una foto del pezzo rotto — risposta entro 24h.">
+  <meta name="robots" content="index, follow">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    .page-header {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--line);
+    }
+    .preventivo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 80px;
+      align-items: start;
+      padding: 80px 0;
+    }
+    /* left: info */
+    .prev-info { position: sticky; top: 90px; }
+    .prev-headline { margin-top: 16px; }
+    .prev-headline em { font-style: italic; color: var(--green); }
+    .prev-body {
+      font-family: var(--font-sans); font-size: 0.92rem;
+      color: var(--ink3); line-height: 1.75; margin-top: 18px;
+    }
+    .prev-alts { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .prev-alt {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--ink3); transition: color 0.18s;
+    }
+    .prev-alt::before { content: ''; width: 14px; height: 1px; background: currentColor; flex-shrink: 0; }
+    .prev-alt:hover { color: var(--green); }
+
+    /* pricing table */
+    .pricing-table { margin-top: 44px; border-top: 1px solid var(--line); }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 14px 0; border-bottom: 1px solid var(--line2);
+    }
+    .pricing-service {
+      font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink2);
+    }
+    .pricing-price {
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.05em;
+    }
+
+    /* right: form card */
+    .form-card {
+      background: var(--bg2); border: 1px solid var(--line);
+      border-radius: 2px; padding: 44px;
+    }
+    .form-card-title {
+      font-family: var(--font-serif); font-weight: 700; font-size: 1.3rem;
+      color: var(--ink); margin-bottom: 28px; letter-spacing: -0.01em;
+    }
+    .form-card-title em { font-style: italic; color: var(--green); }
+
+    /* file upload hint */
+    .file-hint {
+      font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--ink3); margin-top: 6px; line-height: 1.5;
+    }
+
+    @media (max-width: 860px) {
+      .preventivo-grid { grid-template-columns: 1fr; gap: 40px; }
+      .prev-info { position: static; }
+      .form-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'preventivo';</script>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="section-label" data-it="Inizia gratis" data-en="Start free">Inizia gratis</p>
+        <h1 data-it="Preventivo gratuito" data-en="Free quote">Preventivo<br><em style="font-style:italic;color:var(--green)">gratuito</em></h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="wrap">
+    <div class="preventivo-grid">
+
+      <!-- LEFT INFO -->
+      <div class="prev-info reveal">
+        <p class="section-label" data-it="Come funziona" data-en="How it works">Come funziona</p>
+        <h2 class="prev-headline"
+            data-it="Una foto,<br>un preventivo." data-en="One photo,<br>one quote."
+            data-it-html="Una foto,<br>una risposta."
+            data-en-html="One photo,<br>one quote.">
+          Una foto,<br><em>una risposta.</em>
+        </h2>
+        <p class="prev-body"
+           data-it="Compila il form con il tuo contatto e una descrizione di quello che ti serve. Se hai già una foto del pezzo, allegala — è la cosa più utile che puoi darci. Ti risponderemo entro 24 ore con un preventivo chiaro e senza impegno."
+           data-en="Fill in the form with your contact and a description of what you need. If you already have a photo of the part, attach it — it's the most useful thing you can give us. We'll reply within 24 hours with a clear, no-obligation quote.">
+          Compila il form con il tuo contatto e una descrizione di quello che ti serve. Se hai già una foto del pezzo, allegala — è la cosa più utile che puoi darci. Ti risponderemo entro 24 ore con un preventivo chiaro e senza impegno.
+        </p>
+        <div class="prev-alts">
+          <a class="prev-alt" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">
+            Instagram @same.same_vr
+          </a>
+          <a class="prev-alt" href="mailto:samesame.verona@gmail.com">
+            samesame.verona@gmail.com
+          </a>
+          <a class="prev-alt" href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener"
+             data-it="Consulenza gratuita 15 min" data-en="Free 15-min call">
+            Consulenza gratuita 15 min
+          </a>
+        </div>
+
+        <!-- Pricing table -->
+        <div class="pricing-table">
+          <div class="pricing-row">
+            <span class="pricing-service" data-it="Ricostruzione parte" data-en="Part reconstruction">Ricostruzione parte</span>
+            <span class="pricing-price" data-it="da €15" data-en="from €15">da €15</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-service" data-it="Ricambio fuori produzione" data-en="Discontinued spare">Ricambio fuori produzione</span>
+            <span class="pricing-price" data-it="preventivo su misura" data-en="custom quote">preventivo su misura</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-service" data-it="Design originale" data-en="Original design">Design originale</span>
+            <span class="pricing-price" data-it="da €20" data-en="from €20">da €20</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-service" data-it="Regalo personalizzato" data-en="Custom gift">Regalo personalizzato</span>
+            <span class="pricing-price" data-it="da €20" data-en="from €20">da €20</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-service" data-it="Stampa da tuo file STL" data-en="Print from your STL file">Stampa da tuo file STL</span>
+            <span class="pricing-price" data-it="da €8" data-en="from €8">da €8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="reveal d2">
+        <div class="form-card">
+          <p class="form-card-title">
+            <span data-it="Raccontaci il tuo" data-en="Tell us about your">Raccontaci il tuo</span>
+            <em data-it="progetto." data-en="project.">progetto.</em>
+          </p>
+
+          <!-- Success -->
+          <div class="form-success" id="formSuccess">
+            <div class="form-success-num">✓</div>
+            <p>
+              <strong data-it="Messaggio ricevuto!" data-en="Message received!">Messaggio ricevuto!</strong><br>
+              <span data-it="Ti risponderemo entro 24h con un preventivo dettagliato."
+                    data-en="We'll reply within 24h with a detailed quote.">
+                Ti risponderemo entro 24h con un preventivo dettagliato.
+              </span>
+            </p>
+          </div>
+
+          <form id="prevForm" novalidate>
+            <input type="hidden" name="access_key" value="23ab9878-ceb9-4877-938d-7ba7a2b72e91">
+            <input type="hidden" name="subject"    value="Nuova richiesta preventivo — Same Same Verona">
+            <input type="hidden" name="from_name"  value="Same Same Verona Website">
+            <input type="checkbox" name="botcheck" style="display:none">
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="nome" data-it="Nome" data-en="Name">Nome</label>
+                <input class="form-input" type="text" id="nome" name="nome"
+                       placeholder="Mario" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" name="email"
+                       placeholder="mario@email.com" required>
+              </div>
+              <div class="form-field full">
+                <label class="form-label" for="tipo"
+                       data-it="Tipo di richiesta" data-en="Request type">Tipo di richiesta</label>
+                <select class="form-select" id="tipo" name="tipo_richiesta">
+                  <option value="" data-it="Seleziona..." data-en="Select...">Seleziona...</option>
+                  <option value="Ricostruzione parte rotta"
+                          data-it="Ricostruzione parte rotta"
+                          data-en="Broken part reconstruction">Ricostruzione parte rotta</option>
+                  <option value="Ricambio fuori produzione"
+                          data-it="Ricambio fuori produzione"
+                          data-en="Discontinued spare">Ricambio fuori produzione</option>
+                  <option value="Design su misura"
+                          data-it="Design su misura"
+                          data-en="Custom design">Design su misura</option>
+                  <option value="Regalo personalizzato"
+                          data-it="Regalo personalizzato"
+                          data-en="Custom gift">Regalo personalizzato</option>
+                  <option value="Stampa da file STL"
+                          data-it="Ho già il file STL"
+                          data-en="I already have the STL file">Ho già il file STL</option>
+                  <option value="Altro" data-it="Altro" data-en="Other">Altro</option>
+                </select>
+              </div>
+              <div class="form-field full">
+                <label class="form-label" for="messaggio"
+                       data-it="Descrivi il progetto" data-en="Describe your project">Descrivi il progetto</label>
+                <textarea class="form-textarea" id="messaggio" name="messaggio" required
+                          data-it-placeholder="Cosa ti serve? Hai già delle misure o una foto? Anche una descrizione rapida va benissimo."
+                          placeholder="Cosa ti serve? Hai già delle misure o una foto? Anche una descrizione rapida va benissimo."></textarea>
+              </div>
+              <div class="form-field full">
+                <label class="form-label" for="materiale"
+                       data-it="Materiale preferito (opzionale)" data-en="Preferred material (optional)">
+                  Materiale preferito (opzionale)
+                </label>
+                <select class="form-select" id="materiale" name="materiale">
+                  <option value="" data-it="Non lo so / mi fido di voi" data-en="Don't know / trust you">Non lo so / mi fido di voi</option>
+                  <option value="PLA">PLA</option>
+                  <option value="PETG">PETG</option>
+                  <option value="TPU">TPU — flessibile</option>
+                  <option value="ABS">ABS</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Note: Web3Forms non supporta allegati nativamente.
+                 Per inviare foto, invita l'utente a mandarla su Instagram o email. -->
+            <p class="file-hint"
+               data-it="📎 Per allegare foto usa Instagram DM (@same.same_vr) o l'email — il form non supporta allegati."
+               data-en="📎 To attach photos use Instagram DM (@same.same_vr) or email — the form doesn't support attachments.">
+              📎 Per allegare foto usa Instagram DM (@same.same_vr) o l'email — il form non supporta allegati.
+            </p>
+
+            <button class="form-submit" type="submit" id="submitBtn"
+                    data-it="Invia richiesta" data-en="Send request">
+              Invia richiesta
+            </button>
+            <p class="form-note"
+               data-it="Risposta entro 24h · Preventivo gratuito · Nessun impegno"
+               data-en="Reply within 24h · Free quote · No commitment">
+              Risposta entro 24h · Preventivo gratuito · Nessun impegno
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    (function() {
+      const form    = document.getElementById('prevForm');
+      const btn     = document.getElementById('submitBtn');
+      const success = document.getElementById('formSuccess');
+      if (!form) return;
+
+      /* sync placeholder with lang */
+      document.addEventListener('langChange', () => {
+        const ta = document.getElementById('messaggio');
+        const l = localStorage.getItem('ss_lang') || 'it';
+        if (ta) ta.placeholder = ta.getAttribute('data-' + l + '-placeholder') || ta.placeholder;
+      });
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const nome = form.querySelector('[name="nome"]').value.trim();
+        const mail = form.querySelector('[name="email"]').value.trim();
+        const msg  = form.querySelector('[name="messaggio"]').value.trim();
+        if (!nome || !mail || !msg) {
+          alert('Compila almeno nome, email e messaggio.'); return;
+        }
+        btn.disabled = true;
+        btn.textContent = '…';
+        try {
+          const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(form) });
+          const json = await res.json();
+          if (json.success) {
+            form.style.display    = 'none';
+            success.style.display = 'block';
+          } else throw new Error(json.message);
+        } catch {
+          btn.disabled    = false;
+          btn.textContent = btn.getAttribute('data-it') || 'Invia richiesta';
+          alert('Errore invio. Scrivici a samesame.verona@gmail.com');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

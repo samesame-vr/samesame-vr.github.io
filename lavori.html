@@ -4,164 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lavori – Same Same Verona</title>
-  <meta name="description" content="Portfolio dei lavori di Same Same Verona: ricambi ricostruiti, design originali, regali personalizzati stampati in 3D.">
+  <meta name="description" content="Portfolio Same Same Verona: ricambi ricostruiti, design originali, regali personalizzati, stampa da STL.">
   <meta name="robots" content="index, follow">
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHT5D5LYC"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PXHT5D5LYC');</script>
-
   <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="shared.css">
-
   <style>
-    .page-header {
-      padding: 140px 0 80px;
-      border-bottom: 1px solid var(--line);
-    }
-    .page-header-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
-    }
-    .page-header h1 { line-height: 1; }
-    .page-header-note {
-      font-family: var(--font-sans); font-size: 0.95rem;
-      color: var(--ink3); line-height: 1.7; max-width: 380px;
-    }
+    .page-header { padding: 140px 0 80px; border-bottom: 1px solid var(--line); }
+    .page-header-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
+    .page-header-note { font-family:var(--font-sans); font-size:0.95rem; color:var(--ink3); line-height:1.7; max-width:380px; }
 
-    /* ── FILTER BAR ─────────────────────────────────────── */
-    .filter-bar {
-      padding: 28px 0; border-bottom: 1px solid var(--line);
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    }
-    .filter-btn {
-      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
-      text-transform: uppercase; background: none; border: 1px solid var(--line);
-      border-radius: 1px; padding: 6px 14px; cursor: pointer; color: var(--ink3);
-      transition: border-color 0.18s, color 0.18s, background 0.18s;
-    }
-    .filter-btn:hover   { border-color: var(--ink); color: var(--ink); }
-    .filter-btn.active  { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    /* FILTER */
+    .filter-bar { padding:28px 0; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .filter-btn { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; background:none; border:1px solid var(--line); border-radius:1px; padding:6px 14px; cursor:pointer; color:var(--ink3); transition:border-color .18s,color .18s,background .18s; }
+    .filter-btn:hover { border-color:var(--ink); color:var(--ink); }
+    .filter-btn.active { background:var(--ink); color:var(--bg); border-color:var(--ink); }
 
-    /* ── WORK GRID ──────────────────────────────────────── */
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 2px;
-    }
-    .work-card {
-      position: relative; overflow: hidden;
-      background: var(--bg3); cursor: pointer;
-      /* aspect-ratio garantito tramite padding trick — funziona con qualsiasi immagine */
-      aspect-ratio: 1 / 1;
-    }
-    .work-card img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      filter: saturate(0.8) brightness(0.95);
-      transition: filter 0.4s, transform 0.5s;
-    }
-    .work-card:hover img { filter: saturate(1) brightness(1); transform: scale(1.04); }
+    /* GRID */
+    .work-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px; }
+    .work-card { position:relative; overflow:hidden; background:var(--bg3); cursor:pointer; aspect-ratio:1/1; }
+    .work-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(0.8) brightness(0.95); transition:filter .4s,transform .5s; }
+    .work-card:hover img { filter:saturate(1) brightness(1); transform:scale(1.04); }
+    .work-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(26,26,24,.82) 0%,transparent 52%); opacity:0; transition:opacity .35s; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; }
+    .work-card:hover .work-overlay { opacity:1; }
+    .work-cat { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(247,244,238,.6); margin-bottom:6px; }
+    .work-title { font-family:var(--font-serif); font-weight:700; font-size:1.05rem; color:#F7F4EE; line-height:1.2; }
+    .work-price { font-family:var(--font-mono); font-size:0.6rem; color:rgba(247,244,238,.55); margin-top:5px; }
+    .work-ig { position:absolute; top:14px; right:14px; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-decoration:none; color:rgba(247,244,238,.7); border:1px solid rgba(247,244,238,.25); padding:4px 10px; border-radius:1px; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; }
+    .work-card:hover .work-ig { opacity:1; transform:translateY(0); }
 
-    .work-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,26,24,0.82) 0%, transparent 50%);
-      opacity: 0; transition: opacity 0.35s;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 24px;
-    }
-    .work-card:hover .work-overlay { opacity: 1; }
+    /* BEFORE/AFTER */
+    .ba-section { padding:100px 0; border-top:1px solid var(--line); }
+    .ba-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; align-items:center; }
+    .ba-img { position:relative; overflow:hidden; border-radius:2px; background:var(--bg3); }
+    .ba-img img { width:100%; aspect-ratio:1; object-fit:cover; filter:saturate(0.85); }
+    .ba-label { position:absolute; bottom:12px; left:12px; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; background:var(--bg); color:var(--ink); padding:4px 8px; border-radius:1px; }
+    .ba-arrow { text-align:center; font-family:var(--font-serif); font-style:italic; font-size:1.6rem; color:var(--ink3); }
 
-    .work-cat {
-      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(247,244,238,0.6); margin-bottom: 6px;
-    }
-    .work-title {
-      font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
-      color: #F7F4EE; line-height: 1.2;
-    }
-    .work-price {
-      font-family: var(--font-mono); font-size: 0.62rem;
-      color: rgba(247,244,238,0.55); margin-top: 5px;
-    }
-    .work-ig {
-      position: absolute; top: 14px; right: 14px;
-      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em;
-      text-decoration: none; color: rgba(247,244,238,0.7);
-      border: 1px solid rgba(247,244,238,0.25); padding: 4px 10px; border-radius: 1px;
-      opacity: 0; transform: translateY(-4px);
-      transition: opacity 0.3s, transform 0.3s, border-color 0.3s;
-    }
-    .work-card:hover .work-ig { opacity: 1; transform: translateY(0); border-color: rgba(247,244,238,0.6); }
+    /* STL SECTION */
+    .stl-section { padding:80px 0; border-top:1px solid var(--line); background:var(--bg2); }
+    .stl-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .stl-body { font-family:var(--font-sans); font-size:0.92rem; color:var(--ink3); line-height:1.75; margin-top:16px; margin-bottom:28px; }
 
-    /* ── BEFORE/AFTER SECTION ───────────────────────────── */
-    .ba-section { padding: 100px 0; border-top: 1px solid var(--line); }
-    .ba-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: center; }
-    .ba-img {
-      position: relative; overflow: hidden; border-radius: 2px;
-      background: var(--bg3);
-    }
-    .ba-img img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: saturate(0.85); }
-    .ba-label {
-      position: absolute; bottom: 12px; left: 12px;
-      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.14em;
-      text-transform: uppercase; background: var(--bg); color: var(--ink);
-      padding: 4px 8px; border-radius: 1px;
-    }
-    .ba-arrow {
-      text-align: center;
-      font-family: var(--font-serif); font-style: italic;
-      font-size: 1.6rem; color: var(--ink3);
-    }
+    /* CTA */
+    .cta-strip { padding:80px 0; border-top:1px solid var(--line); text-align:center; }
+    .cta-strip h2 { margin-bottom:20px; }
+    .cta-strip p { font-family:var(--font-sans); color:var(--ink3); margin-bottom:28px; font-size:0.95rem; line-height:1.7; }
 
-    /* ── CTA STRIP ──────────────────────────────────────── */
-    .cta-strip {
-      padding: 80px 0; border-top: 1px solid var(--line);
-      text-align: center;
-    }
-    .cta-strip h2 { margin-bottom: 20px; }
-    .cta-strip p  { font-family: var(--font-sans); color: var(--ink3); margin-bottom: 28px; font-size: 0.95rem; line-height:1.7; }
-
-    @media (max-width: 860px) {
-      .page-header-inner { grid-template-columns: 1fr; gap: 20px; }
-      .work-grid { grid-template-columns: repeat(2, 1fr); }
-      .ba-grid { grid-template-columns: 1fr; }
-      .ba-arrow { transform: rotate(90deg); font-size: 2rem; }
+    @media (max-width:860px) {
+      .page-header-inner { grid-template-columns:1fr; gap:20px; }
+      .work-grid { grid-template-columns:repeat(2,1fr); }
+      .ba-grid { grid-template-columns:1fr; }
+      .ba-arrow { transform:rotate(90deg); }
+      .stl-inner { grid-template-columns:1fr; gap:40px; }
     }
   </style>
 </head>
 <body>
-  <script>window.SS_PAGE = 'lavori';</script>
+  <script>window.SS_PAGE='lavori';</script>
 
-  <!-- PAGE HEADER -->
   <header class="page-header">
     <div class="wrap">
       <div class="page-header-inner">
         <div class="reveal">
           <p class="section-label" data-it="Portfolio" data-en="Portfolio">Portfolio</p>
-          <h1 data-it="I nostri lavori" data-en="Our work">I nostri<br><em style="font-style:italic;color:var(--green)">lavori</em></h1>
+          <h1>
+            <span data-it="I nostri" data-en="Our">I nostri</span><br>
+            <em style="font-style:italic;color:var(--green);" data-it="lavori" data-en="work">lavori</em>
+          </h1>
         </div>
         <p class="page-header-note reveal d2"
-           data-it="Ogni progetto parte da un oggetto compromesso e termina con una soluzione più resistente dell'originale. Prezzi indicativi inclusi."
-           data-en="Every project starts from a compromised object and ends with a solution stronger than the original. Indicative prices included.">
-          Ogni progetto parte da un oggetto compromesso e termina con una soluzione più resistente dell'originale. Prezzi indicativi inclusi.
+           data-it="Ricambi ricostruiti, design originali, regali su misura, stampa da file STL. Prezzi indicativi inclusi."
+           data-en="Rebuilt spares, original designs, custom gifts, STL printing. Indicative prices included.">
+          Ricambi ricostruiti, design originali, regali su misura, stampa da file STL. Prezzi indicativi inclusi.
         </p>
       </div>
     </div>
   </header>
 
-  <!-- FILTER BAR -->
+  <!-- FILTER -->
   <div class="wrap">
-    <div class="filter-bar" role="group" aria-label="Filtra per categoria">
-      <button class="filter-btn active" data-filter="all"
-              data-it="Tutti" data-en="All">Tutti</button>
-      <button class="filter-btn" data-filter="ricambi"
-              data-it="Ricambi" data-en="Spare parts">Ricambi</button>
-      <button class="filter-btn" data-filter="design"
-              data-it="Design originale" data-en="Original design">Design originale</button>
-      <button class="filter-btn" data-filter="regali"
-              data-it="Regali" data-en="Gifts">Regali</button>
+    <div class="filter-bar" role="group">
+      <button class="filter-btn active" data-filter="all" data-it="Tutti" data-en="All">Tutti</button>
+      <button class="filter-btn" data-filter="ricambi" data-it="Ricambi" data-en="Spare parts">Ricambi</button>
+      <button class="filter-btn" data-filter="design" data-it="Design originale" data-en="Original design">Design originale</button>
+      <button class="filter-btn" data-filter="regali" data-it="Regali" data-en="Gifts">Regali</button>
+      <button class="filter-btn" data-filter="stampa" data-it="Stampa STL" data-en="STL printing">Stampa STL</button>
     </div>
   </div>
 
@@ -169,62 +99,92 @@
   <div class="wrap" style="padding-top:2px;">
     <div class="work-grid" id="workGrid">
 
-      <div class="work-card reveal" data-cat="ricambi">
-        <img src="newobject.jpg" alt="Gear ring ricostruiti in PLA bianco">
+      <div class="work-card reveal" data-cat="design">
+        <img src="card_phone.jpg" alt="Biglietto da visita Same Same usato come porta telefono">
         <div class="work-overlay">
-          <p class="work-cat" data-it="Ricambi" data-en="Spare parts">Ricambi</p>
-          <p class="work-title" data-it="Flangia dentata — ricostruzione" data-en="Gear ring — reconstruction">Flangia dentata — ricostruzione</p>
-          <p class="work-price" data-it="~€28 · PLA · 3 giorni" data-en="~€28 · PLA · 3 days">~€28 · PLA · 3 giorni</p>
-        </div>
-        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
-      </div>
-
-      <div class="work-card reveal d1" data-cat="ricambi">
-        <img src="design.png" alt="Modello 3D in SketchUp del gear ring">
-        <div class="work-overlay">
-          <p class="work-cat" data-it="Progettazione" data-en="Design">Progettazione</p>
-          <p class="work-title" data-it="Modello 3D — fase di design" data-en="3D Model — design phase">Modello 3D — fase di design</p>
-          <p class="work-price" data-it="Incluso nel preventivo" data-en="Included in quote">Incluso nel preventivo</p>
-        </div>
-        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
-      </div>
-
-      <div class="work-card reveal d2" data-cat="regali">
-        <img src="regali.jpg" alt="Ritratto in rilievo personalizzato su piastra PLA">
-        <div class="work-overlay">
-          <p class="work-cat" data-it="Regali" data-en="Gifts">Regali</p>
-          <p class="work-title" data-it="Ritratto in rilievo" data-en="Relief portrait">Ritratto in rilievo</p>
-          <p class="work-price" data-it="~€22 · PLA · 2 giorni" data-en="~€22 · PLA · 2 days">~€22 · PLA · 2 giorni</p>
+          <p class="work-cat" data-it="Design originale" data-en="Original design">Design originale</p>
+          <p class="work-title" data-it="Biglietto che diventa porta telefono" data-en="Business card → phone stand">Biglietto → porta telefono</p>
+          <p class="work-price" data-it="~€8 · PLA · 2 giorni" data-en="~€8 · PLA · 2 days">~€8 · PLA · 2 giorni</p>
         </div>
         <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
       </div>
 
       <div class="work-card reveal d1" data-cat="design">
-        <img src="design_orig2.jpg" alt="Ferma-porta stampato in PETG nero">
+        <img src="card_flat.jpg" alt="Stack biglietti da visita a forma di cartuccia Game Boy">
         <div class="work-overlay">
           <p class="work-cat" data-it="Design originale" data-en="Original design">Design originale</p>
-          <p class="work-title" data-it="Ferma-porta minimalista" data-en="Minimalist door stopper">Ferma-porta minimalista</p>
+          <p class="work-title" data-it="Cartuccia Game Boy — biglietto" data-en="Game Boy cartridge — business card">Cartuccia Game Boy — biglietto</p>
+          <p class="work-price" data-it="Due pieghe → porta telefono" data-en="Two folds → phone stand">Due pieghe → porta telefono</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="ricambi">
+        <img src="knob_broken.jpg" alt="Manopola cappa originale rotta in metallo">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Prima — ricambio" data-en="Before — spare part">Prima — ricambio</p>
+          <p class="work-title" data-it="Manopola cappa — originale" data-en="Hood knob — original">Manopola cappa — originale</p>
+          <p class="work-price" data-it="Ricambio introvabile" data-en="Discontinued spare">Ricambio introvabile</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="ricambi">
+        <img src="knob_printed.jpg" alt="Manopola cappa ricostruita in PLA bianco">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Dopo — ricambio" data-en="After — spare part">Dopo — ricambio</p>
+          <p class="work-title" data-it="Manopola cappa — ricostruita" data-en="Hood knob — rebuilt">Manopola cappa — ricostruita</p>
+          <p class="work-price" data-it="~€12 · PLA · 2 giorni" data-en="~€12 · PLA · 2 days">~€12 · PLA · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="ricambi">
+        <img src="shower_corner.jpg" alt="Connettore angolo doccia stampato in PETG nero">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Ricambi" data-en="Spare parts">Ricambi</p>
+          <p class="work-title" data-it="Connettore doccia — €600 risparmiati" data-en="Shower connector — €600 saved">Connettore doccia — €600 risparmiati</p>
           <p class="work-price" data-it="~€15 · PETG · 2 giorni" data-en="~€15 · PETG · 2 days">~€15 · PETG · 2 giorni</p>
         </div>
         <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
       </div>
 
-      <div class="work-card reveal d2" data-cat="design">
-        <img src="design_orig1.jpg" alt="Porta-chiavi modulare stampato in PLA bianco">
+      <div class="work-card reveal d3" data-cat="regali">
+        <img src="regali.jpg" alt="Litofania ritratto personalizzata in PLA" style="object-position:center top;">
         <div class="work-overlay">
-          <p class="work-cat" data-it="Design originale" data-en="Original design">Design originale</p>
-          <p class="work-title" data-it="Porta-chiavi modulare" data-en="Modular key holder">Porta-chiavi modulare</p>
-          <p class="work-price" data-it="~€18 · PLA · 2 giorni" data-en="~€18 · PLA · 2 days">~€18 · PLA · 2 giorni</p>
+          <p class="work-cat" data-it="Regali" data-en="Gifts">Regali</p>
+          <p class="work-title" data-it="Ritratto in rilievo — litofania" data-en="Relief portrait — lithophane">Ritratto in rilievo</p>
+          <p class="work-price" data-it="~€22 · PLA · 2 giorni" data-en="~€22 · PLA · 2 days">~€22 · PLA · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="stampa">
+        <img src="print_quality_1.jpg" alt="Nike di Samotracia stampata in 3D — qualità stampa FDM" style="object-position:center top;">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Stampa da STL" data-en="STL printing">Stampa da STL</p>
+          <p class="work-title" data-it="Hai un file? Lo stampiamo noi" data-en="Got a file? We print it">Hai un file? Lo stampiamo noi</p>
+          <p class="work-price" data-it="Da €8 · qualsiasi STL" data-en="From €8 · any STL">Da €8 · qualsiasi STL</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="stampa">
+        <img src="print_quality_2.jpg" alt="Dettaglio ali Nike di Samotracia — qualità stampa FDM">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Qualità di stampa" data-en="Print quality">Qualità di stampa</p>
+          <p class="work-title" data-it="Dettaglio: ali in PLA" data-en="Detail: wings in PLA">Dettaglio: ali in PLA</p>
+          <p class="work-price" data-it="Layer 0.15mm · finitura curata" data-en="0.15mm layer · careful finish">Layer 0.15mm · finitura curata</p>
         </div>
         <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
       </div>
 
       <div class="work-card reveal d3" data-cat="ricambi">
-        <img src="originalobject.jpg" alt="Pezzi rotti prima della ricostruzione">
+        <img src="originalobject.jpg" alt="Gear ring rotto prima della ricostruzione">
         <div class="work-overlay">
-          <p class="work-cat" data-it="Prima / Dopo" data-en="Before / After">Prima / Dopo</p>
-          <p class="work-title" data-it="Analisi del guasto" data-en="Failure analysis">Analisi del guasto</p>
-          <p class="work-price" data-it="Fase di analisi inclusa" data-en="Analysis phase included">Fase di analisi inclusa</p>
+          <p class="work-cat" data-it="Prima" data-en="Before">Prima</p>
+          <p class="work-title" data-it="Flangia dentata — rotta" data-en="Gear ring — broken">Flangia dentata — rotta</p>
+          <p class="work-price" data-it="Analisi inclusa" data-en="Analysis included">Analisi inclusa</p>
         </div>
         <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
       </div>
@@ -235,18 +195,50 @@
   <!-- BEFORE / AFTER -->
   <section class="ba-section">
     <div class="wrap">
-      <p class="section-label reveal" data-it="Il processo in tre immagini" data-en="The process in three images">Il processo in tre immagini</p>
-      <h2 class="reveal d1" style="margin-bottom:48px;"
-          data-it="Prima, durante, dopo." data-en="Before, during, after.">Prima, durante, dopo.</h2>
+      <p class="section-label reveal" data-it="Il processo" data-en="The process">Il processo</p>
+      <h2 class="reveal d1" style="margin-bottom:48px;" data-it="Prima e dopo." data-en="Before and after.">Prima e dopo.</h2>
       <div class="ba-grid">
         <div class="ba-img reveal d1">
-          <img src="originalobject.jpg" alt="Pezzo originale rotto">
-          <span class="ba-label" data-it="Originale rotto" data-en="Broken original">Originale rotto</span>
+          <img src="knob_broken.jpg" alt="Manopola cappa rotta" style="object-position:center;">
+          <span class="ba-label" data-it="Manopola rotta" data-en="Broken knob">Manopola rotta</span>
         </div>
         <div class="ba-arrow reveal d2">→</div>
         <div class="ba-img reveal d3">
-          <img src="newobject.jpg" alt="Pezzo ricostruito in stampa 3D">
-          <span class="ba-label" data-it="Ricostruito" data-en="Rebuilt">Ricostruito</span>
+          <img src="knob_printed.jpg" alt="Manopola ricostruita in PLA" style="object-position:center;">
+          <span class="ba-label" data-it="Ricostruita in PLA" data-en="Rebuilt in PLA">Ricostruita in PLA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STL SECTION -->
+  <section class="stl-section">
+    <div class="wrap">
+      <div class="stl-inner">
+        <div class="reveal">
+          <p class="section-label" data-it="Stampa da file STL" data-en="Print from STL">Stampa da file STL</p>
+          <h2 data-it="Hai già il file?" data-en="Already have the file?">Hai già il file?</h2>
+          <p class="stl-body"
+             data-it="Manda il tuo STL via email o WeTransfer, dicci materiale e quantità — preventivo in poche ore. Stampiamo qualsiasi modello: oggetti funzionali, sculture decorative, prototipi."
+             data-en="Send your STL via email or WeTransfer, tell us material and quantity — quote within hours. We print any model: functional parts, decorative sculptures, prototypes.">
+            Manda il tuo STL via email o WeTransfer, dicci materiale e quantità — preventivo in poche ore. Stampiamo qualsiasi modello: oggetti funzionali, sculture decorative, prototipi.
+          </p>
+          <a class="btn btn-ink" href="mailto:samesame.verona@gmail.com"
+             data-it="Manda il tuo file →" data-en="Send your file →">Manda il tuo file →</a>
+        </div>
+        <div class="reveal d2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="print_quality_1.jpg" alt="Nike di Samotracia stampata in 3D" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="print_quality_2.jpg" alt="Dettaglio ali Nike stampata in PLA" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="design_card.jpg" alt="Modello 3D biglietto in SketchUp" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="card_phone.jpg" alt="Risultato stampato — biglietto porta telefono" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
         </div>
       </div>
     </div>
@@ -255,38 +247,24 @@
   <!-- CTA -->
   <section class="cta-strip">
     <div class="wrap">
-      <h2 class="reveal"
-          data-it="Hai qualcosa da ricostruire?" data-en="Have something to rebuild?">
-        Hai qualcosa da ricostruire?
-      </h2>
-      <p class="reveal d1"
-         data-it="Mandaci una foto — è tutto quello che serve."
-         data-en="Send us a photo — that's all it takes.">
-        Mandaci una foto — è tutto quello che serve.
-      </p>
+      <h2 class="reveal" data-it="Hai qualcosa da ricostruire?" data-en="Have something to rebuild?">Hai qualcosa da ricostruire?</h2>
+      <p class="reveal d1" data-it="Mandaci una foto — è tutto quello che serve." data-en="Send us a photo — that's all it takes.">Mandaci una foto — è tutto quello che serve.</p>
       <div class="reveal d2" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a class="btn btn-ink" href="preventivo.html"
-           data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
-        <a class="btn btn-outline" href="contatti.html"
-           data-it="Contattaci" data-en="Contact us">Contattaci</a>
+        <a class="btn btn-ink" href="preventivo.html" data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="contatti.html" data-it="Contattaci" data-en="Contact us">Contattaci</a>
       </div>
     </div>
   </section>
 
   <script src="shared.js"></script>
   <script>
-    /* Filter logic */
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.work-card');
-
-    filterBtns.forEach(btn => {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const f = btn.dataset.filter;
-        cards.forEach(card => {
-          const show = f === 'all' || card.dataset.cat === f;
-          card.style.display = show ? '' : 'none';
+        document.querySelectorAll('.work-card').forEach(card => {
+          card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
         });
       });
     });

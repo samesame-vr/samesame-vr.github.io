@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti & FAQ – Same Same Verona</title>
+  <meta name="description" content="Contatta Same Same Verona: manda il tuo logo tramite form, prenota una consulenza gratuita, o scrivici su Instagram ed email.">
+  <meta name="robots" content="index, follow">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHT5D5LYC"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PXHT5D5LYC');</script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    .page-header { padding: 140px 0 80px; border-bottom: 1px solid var(--line); }
+
+    /* ── CONTACT GRID ───────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2px; }
+    .contact-card { background: var(--bg2); padding: 48px; display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: var(--ink); transition: background 0.2s; position: relative; overflow: hidden; }
+    .contact-card:hover { background: var(--bg3); }
+    .cc-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); }
+    .cc-title { font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1; }
+    .cc-desc { font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink3); line-height: 1.65; max-width: 340px; }
+    .cc-arrow { position: absolute; bottom: 28px; right: 32px; font-family: var(--font-serif); font-style: italic; font-size: 1.8rem; color: var(--green); transition: transform 0.22s; }
+    .contact-card:hover .cc-arrow { transform: translate(3px, -3px); }
+
+    /* ── FORM + BOOKING (two columns) ────────────────── */
+    .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; padding: 100px 0; border-top: 1px solid var(--line); }
+    .main-col-title { margin-bottom: 8px; }
+    .main-col-note { font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink3); line-height: 1.7; margin-bottom: 24px; max-width: 420px; }
+
+    .tally-embed { background: var(--bg2); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; min-height: 640px; }
+    .tally-embed iframe { width: 100%; min-height: 640px; border: none; display: block; }
+
+    .cal-embed { background: var(--bg2); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; min-height: 640px; }
+    .cal-embed iframe { width: 100%; height: 640px; border: none; display: block; }
+
+    /* ── FAQ ────────────────────────────────────────── */
+    .faq-section { padding: 100px 0; border-top: 1px solid var(--line); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; }
+    .faq-aside { position: sticky; top: 90px; }
+    .faq-list  { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question { width: 100%; background: none; border: none; cursor: pointer; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; text-align: left; }
+    .faq-q-text { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--ink); letter-spacing: -0.01em; line-height: 1.3; }
+    .faq-icon { flex-shrink: 0; width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink3); transition: background 0.18s, border-color 0.18s, transform 0.28s, color 0.18s; }
+    .faq-item.open .faq-icon { background: var(--green); border-color: var(--green); color: var(--bg); transform: rotate(45deg); }
+    .faq-answer { font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink3); line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.38s ease, padding 0.38s; padding: 0 0 0; }
+    .faq-item.open .faq-answer { max-height: 400px; padding: 0 0 24px; }
+
+    /* ── TEAM STRIP ─────────────────────────────────── */
+    .team-section-full { padding: 56px 0; border-top: 1px solid var(--line); background: var(--bg2); }
+    .team-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .team-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); flex-shrink: 0; }
+    .team-text { font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink2); line-height: 1.6; max-width: 680px; }
+
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .main-grid, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+      .faq-aside { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'contatti';</script>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="section-label" data-it="Siamo qui" data-en="We're here">Siamo qui</p>
+        <h1>
+          <span data-it="Contatti" data-en="Contact">Contatti</span><br>
+          <em style="font-style:italic;color:var(--green);"
+              data-it="& FAQ" data-en="& FAQ">& FAQ</em>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT CARDS -->
+  <div class="wrap" style="padding-top:2px;">
+    <div class="contact-grid">
+      <a class="contact-card reveal" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">
+        <span class="cc-label" data-it="Social" data-en="Social">Social</span>
+        <span class="cc-title" data-it="Instagram" data-en="Instagram">Instagram</span>
+        <p class="cc-desc"
+           data-it="Mandateci un DM con il logo o l'idea del gadget — è il modo più veloce per iniziare."
+           data-en="Send us a DM with your logo or gadget idea — it's the fastest way to get started.">
+          Mandateci un DM con il logo o l'idea del gadget — è il modo più veloce per iniziare.
+        </p>
+        <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--green);">@same.same_vr</p>
+        <span class="cc-arrow">↗</span>
+      </a>
+
+      <a class="contact-card reveal d1" href="mailto:samesame.verona@gmail.com">
+        <span class="cc-label" data-it="Email" data-en="Email">Email</span>
+        <span class="cc-title" data-it="Scriveteci" data-en="Write to us">Scriveteci</span>
+        <p class="cc-desc"
+           data-it="Per richieste più dettagliate o se volete allegare più file, l'email è la scelta giusta."
+           data-en="For more detailed requests or if you want to attach several files, email is the right choice.">
+          Per richieste più dettagliate o se volete allegare più file, l'email è la scelta giusta.
+        </p>
+        <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--green);">samesame.verona@gmail.com</p>
+        <span class="cc-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FORM + BOOKING -->
+  <section>
+    <div class="wrap">
+      <div class="main-grid">
+        <div class="reveal">
+          <p class="section-label" data-it="Richiedi un preventivo" data-en="Get a quote">Richiedi un preventivo</p>
+          <h2 class="main-col-title" data-it="Raccontateci il progetto" data-en="Tell us about your project">Raccontateci il progetto</h2>
+          <p class="main-col-note"
+             data-it="Compilate il form con logo, quantità e descrizione — vi rispondiamo entro 24h. Il pagamento si concorda a parte, di solito tramite bonifico."
+             data-en="Fill in the form with your logo, quantity and description — we'll reply within 24h. Payment is arranged separately, usually via bank transfer.">
+            Compilate il form con logo, quantità e descrizione — vi rispondiamo entro 24h. Il pagamento si concorda a parte, di solito tramite bonifico.
+          </p>
+          <div class="tally-embed">
+            <iframe data-tally-src="https://tally.so/embed/WOa6Ka?alignLeft=1&hideTitle=1&dynamicHeight=1"
+                    loading="lazy" title="Form Same Same" aria-label="Form Same Same"></iframe>
+          </div>
+        </div>
+
+        <div class="reveal d2">
+          <p class="section-label" data-it="Consulenza gratuita" data-en="Free consultation">Consulenza gratuita</p>
+          <h2 class="main-col-title" data-it="Parliamone 15 minuti" data-en="Let's talk for 15 minutes">Parliamone 15 minuti</h2>
+          <p class="main-col-note"
+             data-it="Non siete sicuri di cosa vi serve? Prenotate una chiamata gratuita — vi aiutiamo a capire fattibilità, materiale e costi, senza impegno."
+             data-en="Not sure what you need? Book a free call — we'll help you figure out feasibility, material and cost, no commitment.">
+            Non siete sicuri di cosa vi serve? Prenotate una chiamata gratuita — vi aiutiamo a capire fattibilità, materiale e costi, senza impegno.
+          </p>
+          <div class="cal-embed">
+            <iframe src="https://www.cal.eu/same-same/15min?embed=true" title="Prenota una consulenza gratuita"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="faq-aside reveal">
+          <p class="section-label" data-it="Domande frequenti" data-en="FAQ">Domande frequenti</p>
+          <h2 data-it="Tutto quello che volete sapere." data-en="Everything you want to know.">
+            Tutto quello<br>che volete sapere.
+          </h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item reveal d1">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Quanto costa un preventivo?" data-en="How much does a quote cost?">Quanto costa un preventivo?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Nulla. Il preventivo è sempre gratuito e senza impegno. Bastano il vostro logo e una descrizione — vi rispondiamo entro 24 ore."
+                 data-en="Nothing. The quote is always free and without obligation. Just send us your logo and a description — we'll reply within 24 hours.">
+                Nulla. Il preventivo è sempre gratuito e senza impegno. Bastano il vostro logo e una descrizione — vi rispondiamo entro 24 ore.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d1">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Che materiali usate?" data-en="What materials do you use?">Che materiali usate?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Lavoriamo principalmente con PLA (compostabile, leggero, economico — ideale per il merchandising), PETG (resistente a urti e umidità) e TPU (flessibile e gommoso). Vi consigliamo il materiale più adatto in base all'uso del gadget."
+                 data-en="We mainly work with PLA (compostable, lightweight, economical — ideal for merchandise), PETG (impact and moisture resistant) and TPU (flexible and rubbery). We recommend the most suitable material based on the gadget's use.">
+                Lavoriamo principalmente con PLA (compostabile, ideale per il merchandising), PETG e TPU. Vi consigliamo il materiale più adatto in base all'uso.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d2">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Che formato deve avere il logo?" data-en="What format should the logo be?">Che formato deve avere il logo?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Il formato migliore è un file vettoriale (SVG o AI), ma va bene anche un PNG ad alta risoluzione con sfondo trasparente. Se avete solo un'immagine bassa qualità, ditecelo: vediamo insieme come adattarla."
+                 data-en="The best format is a vector file (SVG or AI), but a high-resolution PNG with a transparent background works too. If you only have a low-quality image, let us know: we'll work out how to adapt it together.">
+                Il formato migliore è un file vettoriale (SVG o AI), ma va bene anche un PNG ad alta risoluzione con sfondo trasparente.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d2">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Qual è l'ordine minimo?" data-en="What's the minimum order?">Qual è l'ordine minimo?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Per il merchandising, di solito 5 pezzi. Per prototipi e pezzi unici non c'è un minimo — basta un pezzo."
+                 data-en="For merchandise, usually 5 pieces. For prototypes and one-off pieces there's no minimum — a single piece is fine.">
+                Per il merchandising, di solito 5 pezzi. Per prototipi e pezzi unici non c'è un minimo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d3">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Quanto tempo ci vuole?" data-en="How long does it take?">Quanto tempo ci vuole?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Dipende dalla complessità e dalla quantità. Piccoli lotti di gadget: 3–5 giorni. Design originali o espositori smart: 5–7 giorni. Vi diciamo i tempi esatti nel preventivo."
+                 data-en="It depends on complexity and quantity. Small gadget batches: 3–5 days. Original designs or smart displays: 5–7 days. We tell you exact timings in the quote.">
+                Piccoli lotti di gadget: 3–5 giorni. Design originali o espositori smart: 5–7 giorni. I tempi esatti sono nel preventivo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d3">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Come si paga?" data-en="How do I pay?">Come si paga?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Di solito tramite bonifico bancario, da concordare quando confermate l'ordine. Vi mandiamo i dati insieme al preventivo definitivo."
+                 data-en="Usually via bank transfer, arranged once you confirm the order. We'll send you the details along with the final quote.">
+                Di solito tramite bonifico bancario, da concordare quando confermate l'ordine.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal d4">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-q-text" data-it="Spedite in tutta Italia?" data-en="Do you ship across Italy?">Spedite in tutta Italia?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-it="Sì. Potete ritirare a Verona oppure ricevere il pezzo direttamente in sede tramite corriere. I costi di spedizione vengono comunicati nel preventivo."
+                 data-en="Yes. You can pick up in Verona or receive the piece directly via courier. Shipping costs are communicated in the quote.">
+                Sì. Ritiro a Verona o spedizione in tutta Italia. I costi di spedizione sono nel preventivo.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section-full">
+    <div class="wrap">
+      <div class="team-inner reveal">
+        <span class="team-label" data-it="Chi siamo" data-en="Who we are">Chi siamo</span>
+        <p class="team-text"
+           data-it="Siamo un piccolo team con sede a Verona: progettiamo e stampiamo ogni pezzo a mano, seguendo l'ordine dall'idea alla consegna."
+           data-en="We're a small team based in Verona: we design and print every piece by hand, following the order from idea to delivery.">
+          Siamo un piccolo team con sede a Verona: progettiamo e stampiamo ogni pezzo a mano, seguendo l'ordine dall'idea alla consegna.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+  <script src="https://tally.so/widgets/embed.js"></script>
+  <script>
+    /* ── FAQ ACCORDION ──────────────────────────────── */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

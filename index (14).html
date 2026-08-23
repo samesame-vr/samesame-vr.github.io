@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Same Same Verona – Gadget 3D per Aziende e Associazioni</title>
+  <meta name="description" content="Gadget personalizzati stampati in 3D per aziende e associazioni: merchandising, espositori smart con NFC, prototipi su misura. Verona.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://samesame-vr.github.io/">
+  <meta property="og:title"       content="Same Same Verona – Gadget 3D per Aziende e Associazioni">
+  <meta property="og:description" content="Merchandising, espositori smart NFC e prototipi stampati in 3D. Piccoli lotti, tempi rapidi.">
+  <meta property="og:image"       content="https://samesame-vr.github.io/og-image.jpg">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="it_IT">
+  <meta name="twitter:card"       content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"Same Same Verona",
+   "description":"Stampa 3D di gadget personalizzati, espositori smart con NFC e prototipi su misura per aziende e associazioni.",
+   "url":"https://samesame-vr.github.io/","email":"samesame.verona@gmail.com",
+   "address":{"@type":"PostalAddress","addressLocality":"Verona","addressRegion":"VR","addressCountry":"IT"},
+   "sameAs":["https://instagram.com/same.same_vr"]}
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHT5D5LYC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PXHT5D5LYC');
+  </script>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+
+  <style>
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; padding-top: 64px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .hero-left {
+      padding: 56px var(--pad) 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--line);
+      min-height: calc(100vh - 64px);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: riseIn 0.7s 0.1s ease forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--green); }
+    .hero-h1 { opacity: 0; animation: riseIn 0.8s 0.25s ease forwards; }
+    .hero-h1 em { font-style: italic; color: var(--green); }
+    .hero-tagline {
+      font-family: var(--font-sans); font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--ink2); line-height: 1.65; margin-top: 28px; max-width: 440px;
+      opacity: 0; animation: riseIn 0.8s 0.42s ease forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap;
+      opacity: 0; animation: riseIn 0.8s 0.58s ease forwards;
+    }
+    .hero-proof {
+      display: flex; gap: 0; margin-top: 52px;
+      border-top: 1px solid var(--line); padding-top: 28px;
+      opacity: 0; animation: riseIn 0.8s 0.72s ease forwards;
+    }
+    .proof-item { padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--line); }
+    .proof-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .proof-num {
+      font-family: var(--font-serif); font-weight: 700;
+      font-size: 2rem; color: var(--ink); line-height: 1;
+    }
+    .proof-label {
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink3); margin-top: 4px;
+    }
+
+    .hero-right { padding: 16px 16px 16px var(--pad); display: grid; grid-template-rows: auto auto; gap: 10px; align-self: stretch; }
+    .hero-img-main { position: relative; overflow: hidden; border-radius: 2px; background: var(--bg3); aspect-ratio: 4 / 3; }
+    .hero-img-main img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: transform 0.6s ease; }
+    .hero-img-main:hover img { transform: scale(1.03); }
+    .hero-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hero-img-small { position: relative; overflow: hidden; border-radius: 2px; background: var(--bg3); aspect-ratio: 1; }
+    .hero-img-small img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: transform 0.6s ease; }
+    .hero-img-small:hover img { transform: scale(1.04); }
+
+    /* ── HOW IT WORKS ───────────────────────────────────── */
+    .how-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; }
+    .how-aside { position: sticky; top: 90px; }
+    .how-steps { border-top: 1px solid var(--line); }
+    .how-step { display: grid; grid-template-columns: 40px 1fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .step-num { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--green); padding-top: 4px; }
+    .step-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .step-desc { font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink3); line-height: 1.7; }
+    .step-badge { display: inline-block; margin-top: 10px; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green-line); border-radius: 1px; padding: 3px 9px; }
+
+    /* ── SERVICES ───────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: 80px; align-items: start; }
+    .services-aside { position: sticky; top: 90px; }
+    .service-list { border-top: 1px solid var(--line); }
+    .service-item { display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); align-items: start; transition: padding-left 0.22s; }
+    .service-item:hover { padding-left: 6px; }
+    .service-icon { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink3); flex-shrink: 0; transition: border-color 0.22s, color 0.22s, background 0.22s; }
+    .service-item:hover .service-icon { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+    .service-name { font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .service-desc { font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink3); line-height: 1.65; }
+    .service-price { font-family: var(--font-mono); font-size: 0.62rem; color: var(--green); margin-top: 7px; letter-spacing: 0.05em; }
+
+    /* ── TEAM STRIP ─────────────────────────────────────── */
+    .team-section { padding: 56px 0; border-top: 1px solid var(--line); }
+    .team-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .team-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); flex-shrink: 0; }
+    .team-text { font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink2); line-height: 1.6; max-width: 640px; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { border-right: none; padding: 40px var(--pad) 32px; min-height: auto; }
+      .hero-right { display: grid; padding: 0 var(--pad) 40px; }
+      .how-grid, .services-grid { grid-template-columns: 1fr; gap: 40px; }
+      .how-aside, .services-aside { position: static; }
+      .hero-proof { flex-wrap: wrap; gap: 16px; }
+      .proof-item { border-right: none; margin-right: 0; padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE = 'home';</script>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow"
+         data-it="Verona · Gadget & Merchandising 3D"
+         data-en="Verona · 3D Gadgets & Merchandise">
+        Verona · Gadget & Merchandising 3D
+      </p>
+      <h1 class="hero-h1">
+        <span data-it="Il vostro brand," data-en="Your brand,">Il vostro brand,</span><br>
+        <em data-it="stampato su misura." data-en="printed to measure.">stampato su misura.</em>
+      </h1>
+      <p class="hero-tagline"
+         data-it="Progettiamo e stampiamo in 3D gadget personalizzati per aziende e associazioni: dal merchandising per eventi agli espositori smart con NFC. Piccoli lotti, tempi rapidi, qualità curata a mano."
+         data-en="We design and 3D print custom gadgets for businesses and associations: event merchandise, smart NFC displays, and more. Small batches, fast turnaround, hand-checked quality.">
+        Progettiamo e stampiamo in 3D gadget personalizzati per aziende e associazioni: dal merchandising per eventi agli espositori smart con NFC. Piccoli lotti, tempi rapidi, qualità curata a mano.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-ink" href="lavori.html"
+           data-it="Guarda i lavori" data-en="See our work">Guarda i lavori</a>
+        <a class="btn btn-outline" href="index.html#come-funziona"
+           data-it="Come funziona" data-en="How it works">Come funziona</a>
+      </div>
+      <div style="margin-top:14px">
+        <a class="btn btn-green" href="https://www.cal.eu/same-same/15min" target="_blank" rel="noopener"
+           data-it="Consulenza gratuita 15 min →" data-en="Free 15-min call →">
+          Consulenza gratuita 15 min →
+        </a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <p class="proof-num">5</p>
+          <p class="proof-label" data-it="Pezzi minimi per ordine" data-en="Minimum pieces per order">Pezzi minimi per ordine</p>
+        </div>
+        <div class="proof-item">
+          <p class="proof-num">24h</p>
+          <p class="proof-label" data-it="Preventivo gratis" data-en="Free quote">Preventivo gratis</p>
+        </div>
+        <div class="proof-item">
+          <p class="proof-num">3</p>
+          <p class="proof-label" data-it="Materiali: PLA, PETG, TPU" data-en="Materials: PLA, PETG, TPU">Materiali: PLA, PETG, TPU</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-img-main">
+        <img src="keychain-nfc.jpg" alt="Portachiavi personalizzato con tag NFC stampato in 3D" loading="lazy">
+      </div>
+      <div class="hero-img-pair">
+        <div class="hero-img-small">
+          <img src="printer-x2d.jpg" alt="Stampante Bambu Lab X2D al lavoro" loading="lazy">
+        </div>
+        <div class="hero-img-small">
+          <img src="gadget-lotto.jpg" alt="Piccolo lotto di gadget personalizzati appena stampati" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HOW IT WORKS ───────────────────────────────────── -->
+  <section class="section" id="come-funziona">
+    <div class="wrap">
+      <div class="how-grid">
+        <div class="how-aside reveal">
+          <p class="section-label" data-it="Il processo" data-en="The process">Il processo</p>
+          <h2 data-it="Come funziona" data-en="How it works">Come funziona</h2>
+        </div>
+        <div class="how-steps">
+          <div class="how-step reveal d1">
+            <span class="step-num">01</span>
+            <div>
+              <p class="step-title" data-it="Raccontateci il progetto" data-en="Tell us about it">Raccontateci il progetto</p>
+              <p class="step-desc"
+                 data-it="Mandateci il vostro logo o l'idea del gadget che avete in mente — anche solo una descrizione va bene per iniziare."
+                 data-en="Send us your logo or the idea for the gadget you have in mind — even just a description is enough to start.">
+                Mandateci il vostro logo o l'idea del gadget che avete in mente — anche solo una descrizione va bene per iniziare.
+              </p>
+              <span class="step-badge" data-it="Gratis · Nessun impegno" data-en="Free · No commitment">Gratis · Nessun impegno</span>
+            </div>
+          </div>
+          <div class="how-step reveal d2">
+            <span class="step-num">02</span>
+            <div>
+              <p class="step-title" data-it="Preventivo in 24h" data-en="Quote in 24h">Preventivo in 24h</p>
+              <p class="step-desc"
+                 data-it="Valutiamo materiale, quantità e tempi e vi mandiamo un preventivo chiaro. Se preferite, prenotate una chiamata gratuita di 15 minuti."
+                 data-en="We evaluate material, quantity and timing and send you a clear quote. If you prefer, book a free 15-minute call.">
+                Valutiamo materiale, quantità e tempi e vi mandiamo un preventivo chiaro. Se preferite, prenotate una chiamata gratuita di 15 minuti.
+              </p>
+              <span class="step-badge" data-it="Risposta entro 24h" data-en="Reply within 24h">Risposta entro 24h</span>
+            </div>
+          </div>
+          <div class="how-step reveal d3">
+            <span class="step-num">03</span>
+            <div>
+              <p class="step-title" data-it="Ritiro o spedizione" data-en="Pickup or delivery">Ritiro o spedizione</p>
+              <p class="step-desc"
+                 data-it="Progettiamo, stampiamo e rifiniamo ogni pezzo del lotto. Potete ritirarlo a Verona o riceverlo direttamente in sede."
+                 data-en="We design, print and finish every piece of the batch. You can pick it up in Verona or receive it directly at your office.">
+                Progettiamo, stampiamo e rifiniamo ogni pezzo del lotto. Potete ritirarlo a Verona o riceverlo direttamente in sede.
+              </p>
+              <span class="step-badge" data-it="Ritiro a Verona o spedizione" data-en="Verona pickup or shipping">Ritiro a Verona o spedizione</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ───────────────────────────────────────── -->
+  <section class="section" id="servizi">
+    <div class="wrap">
+      <div class="services-grid">
+        <div class="services-aside reveal">
+          <p class="section-label" data-it="Cosa facciamo" data-en="What we do">Cosa facciamo</p>
+          <h2 data-it="I nostri servizi" data-en="Our services">I nostri servizi</h2>
+        </div>
+        <div class="service-list">
+          <div class="service-item reveal d1">
+            <div class="service-icon">01</div>
+            <div>
+              <p class="service-name" data-it="Gadget & Merchandising" data-en="Gadgets & Merchandise">Gadget & Merchandising</p>
+              <p class="service-desc"
+                 data-it="Piccoli lotti di gadget personalizzati in PLA compostabile per aziende, eventi e associazioni — portachiavi, calamite, oggetti da banco con il vostro logo."
+                 data-en="Small batches of custom gadgets in compostable PLA for businesses, events and associations — keychains, magnets, branded desk items.">
+                Piccoli lotti di gadget personalizzati in PLA compostabile per aziende, eventi e associazioni — portachiavi, calamite, oggetti da banco con il vostro logo.
+              </p>
+              <p class="service-price" data-it="Da €0,80 a pezzo, min. 5 pezzi" data-en="From €0.80 per piece, min. 5 pieces">Da €0,80 a pezzo, min. 5 pezzi</p>
+            </div>
+          </div>
+          <div class="service-item reveal d2">
+            <div class="service-icon">02</div>
+            <div>
+              <p class="service-name" data-it="Smart & Business" data-en="Smart & Business">Smart & Business</p>
+              <p class="service-desc"
+                 data-it="Espositori da banco con tag NFC integrato in stampa, pronti a portare i clienti dritti alla vostra pagina recensioni Google con un tocco."
+                 data-en="Countertop displays with an NFC tag embedded during printing, taking customers straight to your Google reviews page with a tap.">
+                Espositori da banco con tag NFC integrato in stampa, pronti a portare i clienti dritti alla vostra pagina recensioni Google con un tocco.
+              </p>
+              <p class="service-price" data-it="Preventivo su misura" data-en="Custom quote">Preventivo su misura</p>
+            </div>
+          </div>
+          <div class="service-item reveal d3">
+            <div class="service-icon">03</div>
+            <div>
+              <p class="service-name" data-it="Prototipazione & Design" data-en="Prototyping & Design">Prototipazione & Design</p>
+              <p class="service-desc"
+                 data-it="Dalla vostra idea a un oggetto reale: modelliamo geometrie su misura e stampiamo iterazioni rapide fino al risultato giusto."
+                 data-en="From your idea to a real object: we model custom geometries and print fast iterations until it's right.">
+                Dalla vostra idea a un oggetto reale: modelliamo geometrie su misura e stampiamo iterazioni rapide fino al risultato giusto.
+              </p>
+              <p class="service-price" data-it="Consulenza iniziale gratuita" data-en="Free initial consultation">Consulenza iniziale gratuita</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEAM STRIP ─────────────────────────────────────── -->
+  <section class="team-section">
+    <div class="wrap">
+      <div class="team-inner reveal">
+        <span class="team-label" data-it="Chi siamo" data-en="Who we are">Chi siamo</span>
+        <p class="team-text"
+           data-it="Siamo un piccolo team con sede a Verona: progettiamo e stampiamo ogni pezzo a mano, seguendo l'ordine dall'idea alla consegna."
+           data-en="We're a small team based in Verona: we design and print every piece by hand, following the order from idea to delivery.">
+          Siamo un piccolo team con sede a Verona: progettiamo e stampiamo ogni pezzo a mano, seguendo l'ordine dall'idea alla consegna.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINALE ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="wrap">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="reveal">
+        <div>
+          <p class="section-label" data-it="Inizia ora" data-en="Start now">Inizia ora</p>
+          <h2 data-it="Un evento, un logo, un'idea?" data-en="An event, a logo, an idea?">Un evento, un logo, un'idea?</h2>
+          <p style="font-family:var(--font-sans);font-size:0.95rem;color:var(--ink3);line-height:1.7;margin-top:16px;"
+             data-it="Mandateci il vostro logo — è tutto quello che serve per iniziare."
+             data-en="Send us your logo — that's all it takes to get started.">
+            Mandateci il vostro logo — è tutto quello che serve per iniziare.
+          </p>
+          <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+            <a class="btn btn-ink" href="contatti.html"
+               data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+            <a class="btn btn-outline" href="lavori.html"
+               data-it="Vedi i lavori" data-en="See our work">Vedi i lavori</a>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="keychain-nfc.jpg" alt="Portachiavi con tag NFC" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="gadget-lotto.jpg" alt="Lotto di gadget personalizzati" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="design_orig1.png" alt="Modello 3D progettato su misura" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="printer-x2d.jpg" alt="Bambu Lab X2D durante la stampa" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+</body>
+</html>

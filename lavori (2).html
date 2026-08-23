@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavori – Same Same Verona</title>
+  <meta name="description" content="Portfolio Same Same Verona: gadget e merchandising personalizzati, espositori smart NFC, regali e pezzi unici stampati in 3D.">
+  <meta name="robots" content="index, follow">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHT5D5LYC"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PXHT5D5LYC');</script>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .page-header { padding: 140px 0 80px; border-bottom: 1px solid var(--line); }
+    .page-header-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
+    .page-header-note { font-family:var(--font-sans); font-size:0.95rem; color:var(--ink3); line-height:1.7; max-width:380px; }
+
+    /* FILTER */
+    .filter-bar { padding:28px 0; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .filter-btn { font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; background:none; border:1px solid var(--line); border-radius:1px; padding:6px 14px; cursor:pointer; color:var(--ink3); transition:border-color .18s,color .18s,background .18s; }
+    .filter-btn:hover { border-color:var(--ink); color:var(--ink); }
+    .filter-btn.active { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+
+    /* GRID */
+    .work-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px; }
+    .work-card { position:relative; overflow:hidden; background:var(--bg3); cursor:pointer; aspect-ratio:1/1; }
+    .work-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(0.8) brightness(0.95); transition:filter .4s,transform .5s; }
+    .work-card:hover img { filter:saturate(1) brightness(1); transform:scale(1.04); }
+    .work-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(26,26,24,.82) 0%,transparent 52%); opacity:0; transition:opacity .35s; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; }
+    .work-card:hover .work-overlay { opacity:1; }
+    .work-cat { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(247,244,238,.6); margin-bottom:6px; }
+    .work-title { font-family:var(--font-serif); font-weight:700; font-size:1.05rem; color:#F7F4EE; line-height:1.2; }
+    .work-price { font-family:var(--font-mono); font-size:0.6rem; color:rgba(247,244,238,.55); margin-top:5px; }
+    .work-ig { position:absolute; top:14px; right:14px; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-decoration:none; color:rgba(247,244,238,.7); border:1px solid rgba(247,244,238,.25); padding:4px 10px; border-radius:1px; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; }
+    .work-card:hover .work-ig { opacity:1; transform:translateY(0); }
+
+    /* BEFORE/AFTER */
+    .ba-section { padding:100px 0; border-top:1px solid var(--line); }
+    .ba-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; align-items:center; }
+    .ba-img { position:relative; overflow:hidden; border-radius:2px; background:var(--bg3); }
+    .ba-img img { width:100%; aspect-ratio:1; object-fit:cover; filter:saturate(0.85); }
+    .ba-label { position:absolute; bottom:12px; left:12px; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; background:var(--bg); color:var(--ink); padding:4px 8px; border-radius:1px; }
+    .ba-arrow { text-align:center; font-family:var(--font-serif); font-style:italic; font-size:1.6rem; color:var(--ink3); }
+
+    /* STL SECTION */
+    .stl-section { padding:80px 0; border-top:1px solid var(--line); background:var(--bg2); }
+    .stl-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .stl-body { font-family:var(--font-sans); font-size:0.92rem; color:var(--ink3); line-height:1.75; margin-top:16px; margin-bottom:28px; }
+
+    /* CTA */
+    .cta-strip { padding:80px 0; border-top:1px solid var(--line); text-align:center; }
+    .cta-strip h2 { margin-bottom:20px; }
+    .cta-strip p { font-family:var(--font-sans); color:var(--ink3); margin-bottom:28px; font-size:0.95rem; line-height:1.7; }
+
+    @media (max-width:860px) {
+      .page-header-inner { grid-template-columns:1fr; gap:20px; }
+      .work-grid { grid-template-columns:repeat(2,1fr); }
+      .ba-grid { grid-template-columns:1fr; }
+      .ba-arrow { transform:rotate(90deg); }
+      .stl-inner { grid-template-columns:1fr; gap:40px; }
+    }
+  </style>
+</head>
+<body>
+  <script>window.SS_PAGE='lavori';</script>
+
+  <header class="page-header">
+    <div class="wrap">
+      <div class="page-header-inner">
+        <div class="reveal">
+          <p class="section-label" data-it="Portfolio" data-en="Portfolio">Portfolio</p>
+          <h1>
+            <span data-it="I nostri" data-en="Our">I nostri</span><br>
+            <em style="font-style:italic;color:var(--green);" data-it="lavori" data-en="work">lavori</em>
+          </h1>
+        </div>
+        <p class="page-header-note reveal d2"
+           data-it="Gadget e merchandising per aziende, espositori smart con NFC, regali e pezzi unici. Prezzi indicativi inclusi."
+           data-en="Gadgets and merchandise for businesses, smart NFC displays, gifts and one-off pieces. Indicative prices included.">
+          Gadget e merchandising per aziende, espositori smart con NFC, regali e pezzi unici. Prezzi indicativi inclusi.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTER -->
+  <div class="wrap">
+    <div class="filter-bar" role="group">
+      <button class="filter-btn active" data-filter="all" data-it="Tutti" data-en="All">Tutti</button>
+      <button class="filter-btn" data-filter="merch" data-it="Merchandising & Gadget" data-en="Merchandise & Gadgets">Merchandising & Gadget</button>
+      <button class="filter-btn" data-filter="smart" data-it="Smart & NFC" data-en="Smart & NFC">Smart & NFC</button>
+      <button class="filter-btn" data-filter="regali" data-it="Regali & Pezzi unici" data-en="Gifts & One-offs">Regali & Pezzi unici</button>
+    </div>
+  </div>
+
+  <!-- WORK GRID -->
+  <div class="wrap" style="padding-top:2px;">
+    <div class="work-grid" id="workGrid">
+
+      <div class="work-card reveal" data-cat="smart">
+        <img src="keychain-nfc.jpg" alt="Portachiavi personalizzato con tag NFC integrato" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Smart & NFC" data-en="Smart & NFC">Smart & NFC</p>
+          <p class="work-title" data-it="Portachiavi con tag NFC" data-en="Keychain with NFC tag">Portachiavi con tag NFC</p>
+          <p class="work-price" data-it="Da €0,80 a pezzo · min. 5 pz" data-en="From €0.80 per piece · min. 5 pcs">Da €0,80 a pezzo · min. 5 pz</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="smart">
+        <img src="nfc-display.jpg" alt="Espositore da banco con tag NFC per recensioni Google" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Smart & Business" data-en="Smart & Business">Smart & Business</p>
+          <p class="work-title" data-it="Espositore recensioni Google" data-en="Google reviews display">Espositore recensioni Google</p>
+          <p class="work-price" data-it="Preventivo su misura" data-en="Custom quote">Preventivo su misura</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="merch">
+        <img src="gadget-lotto.jpg" alt="Lotto di gadget personalizzati per un evento aziendale" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Merchandising" data-en="Merchandise">Merchandising</p>
+          <p class="work-title" data-it="Gadget per evento aziendale" data-en="Corporate event gadgets">Gadget per evento aziendale</p>
+          <p class="work-price" data-it="Piccoli lotti · PLA/PETG" data-en="Small batches · PLA/PETG">Piccoli lotti · PLA/PETG</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d3" data-cat="merch">
+        <img src="card_phone.jpg" alt="Biglietto da visita usato come porta telefono" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Merchandising" data-en="Merchandise">Merchandising</p>
+          <p class="work-title" data-it="Biglietto che diventa porta telefono" data-en="Business card → phone stand">Biglietto → porta telefono</p>
+          <p class="work-price" data-it="~€8 · PLA · 2 giorni" data-en="~€8 · PLA · 2 days">~€8 · PLA · 2 giorni</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d1" data-cat="regali">
+        <img src="robot-controller.jpg" alt="Controller stampato in 3D per braccio robotico" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Pezzo unico" data-en="One-off piece">Pezzo unico</p>
+          <p class="work-title" data-it="Controller per braccio robotico" data-en="Robotic arm controller">Controller per braccio robotico</p>
+          <p class="work-price" data-it="Progetto su misura" data-en="Custom project">Progetto su misura</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+      <div class="work-card reveal d2" data-cat="regali">
+        <img src="gear_printed.jpg" alt="Ingranaggio rotto ricostruito in stampa 3D" loading="lazy">
+        <div class="work-overlay">
+          <p class="work-cat" data-it="Pezzo unico" data-en="One-off piece">Pezzo unico</p>
+          <p class="work-title" data-it="Ingranaggio ricostruito" data-en="Rebuilt gear">Ingranaggio ricostruito</p>
+          <p class="work-price" data-it="Analisi inclusa" data-en="Analysis included">Analisi inclusa</p>
+        </div>
+        <a class="work-ig" href="https://instagram.com/same.same_vr" target="_blank" rel="noopener">↗ IG</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <section class="ba-section">
+    <div class="wrap">
+      <p class="section-label reveal" data-it="Un pezzo unico" data-en="A one-off piece">Un pezzo unico</p>
+      <h2 class="reveal d1" style="margin-bottom:48px;" data-it="Prima e dopo." data-en="Before and after.">Prima e dopo.</h2>
+      <div class="ba-grid">
+        <div class="ba-img reveal d1">
+          <img src="gear_broken.jpg" alt="Ingranaggio rotto" loading="lazy" style="object-position:center;">
+          <span class="ba-label" data-it="Ingranaggio rotto" data-en="Broken gear">Ingranaggio rotto</span>
+        </div>
+        <div class="ba-arrow reveal d2">→</div>
+        <div class="ba-img reveal d3">
+          <img src="gear_printed.jpg" alt="Ingranaggio ricostruito in PLA" loading="lazy" style="object-position:center;">
+          <span class="ba-label" data-it="Ricostruito in PLA" data-en="Rebuilt in PLA">Ricostruito in PLA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STL SECTION -->
+  <section class="stl-section">
+    <div class="wrap">
+      <div class="stl-inner">
+        <div class="reveal">
+          <p class="section-label" data-it="Stampa da file STL" data-en="Print from STL">Stampa da file STL</p>
+          <h2 data-it="Avete già il file?" data-en="Already have the file?">Avete già il file?</h2>
+          <p class="stl-body"
+             data-it="Mandateci il vostro STL o SVG via email, dicci materiale e quantità — preventivo in poche ore. Stampiamo qualsiasi modello: gadget, prototipi, componenti funzionali."
+             data-en="Send us your STL or SVG via email, tell us material and quantity — quote within hours. We print any model: gadgets, prototypes, functional parts.">
+            Mandateci il vostro STL o SVG via email, dicci materiale e quantità — preventivo in poche ore. Stampiamo qualsiasi modello: gadget, prototipi, componenti funzionali.
+          </p>
+          <a class="btn btn-ink" href="mailto:samesame.verona@gmail.com"
+             data-it="Mandate il vostro file →" data-en="Send your file →">Mandate il vostro file →</a>
+        </div>
+        <div class="reveal d2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="keychain-nfc.jpg" alt="Portachiavi con tag NFC" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="gadget-lotto.jpg" alt="Lotto di gadget personalizzati" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="nfc-display.jpg" alt="Espositore smart con NFC" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;aspect-ratio:1;">
+            <img src="card_phone.jpg" alt="Biglietto porta telefono stampato" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.85);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="wrap">
+      <h2 class="reveal" data-it="Avete un evento o un logo da stampare?" data-en="Got an event or a logo to print?">Avete un evento o un logo da stampare?</h2>
+      <p class="reveal d1" data-it="Mandateci il logo — è tutto quello che serve." data-en="Send us your logo — that's all it takes.">Mandateci il logo — è tutto quello che serve.</p>
+      <div class="reveal d2" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-ink" href="contatti.html" data-it="Richiedi preventivo" data-en="Get a quote">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="contatti.html" data-it="Contattateci" data-en="Contact us">Contattateci</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.work-card').forEach(card => {
+          card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
